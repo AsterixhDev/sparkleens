@@ -1,16 +1,18 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle2, Phone, Clock } from "lucide-react";
+import { BadgeDollarSign, Stars, ClipboardCheck, Clock, Phone, Hourglass } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 
 const GetQuote = () => {
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -22,6 +24,21 @@ const GetQuote = () => {
     frequency: "",
     details: "",
   });
+
+  // Auto-fill service type based on URL parameter
+  useEffect(() => {
+    const type = searchParams.get('type');
+    if (type) {
+      setFormData(prev => ({ ...prev, serviceType: type }));
+      
+      // Auto-select suggested property type based on service
+      if (type === 'office') {
+        setFormData(prev => ({ ...prev, propertyType: 'office' }));
+      } else if (type === 'home') {
+        setFormData(prev => ({ ...prev, propertyType: 'house' }));
+      }
+    }
+  }, [searchParams]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,7 +72,7 @@ const GetQuote = () => {
       {/* Form Section */}
       <section className="py-16 flex-grow">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Left: Form */}
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-bold text-secondary mb-6">Request Quote</h2>
@@ -110,7 +127,10 @@ const GetQuote = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="serviceType">Service Type *</Label>
-                    <Select onValueChange={(value) => handleChange("serviceType", value)}>
+                    <Select 
+                      value={formData.serviceType}
+                      onValueChange={(value) => handleChange("serviceType", value)}
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="Select a service type" />
                       </SelectTrigger>
@@ -123,7 +143,10 @@ const GetQuote = () => {
                   </div>
                   <div>
                     <Label htmlFor="propertyType">Property Type</Label>
-                    <Select onValueChange={(value) => handleChange("propertyType", value)}>
+                    <Select 
+                      value={formData.propertyType}
+                      onValueChange={(value) => handleChange("propertyType", value)}
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="Select a property type" />
                       </SelectTrigger>
@@ -194,14 +217,28 @@ const GetQuote = () => {
                 </h3>
                 <ul className="space-y-3">
                   {[
-                    "Free, no-obligation quote",
-                    "Expert consultation included",
-                    "Customized service plans",
-                    "Response within 24 hours"
+                    {
+                      icon: BadgeDollarSign,
+                      text: "Free, no-obligation quote"
+                    },
+                    {
+                      icon: Stars,
+                      text: "Expert consultation included"
+                    },
+                    {
+                      icon: ClipboardCheck,
+                      text: "Customized service plans"
+                    },
+                    {
+                      icon: Hourglass,
+                      text: "Response within 24 hours"
+                    }
                   ].map((item, index) => (
-                    <li key={index} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">{item}</span>
+                    <li key={index} className="flex items-center gap-2">
+                      {React.createElement(item.icon, {
+                        className: "w-5 h-5 text-secondary flex-shrink-0 mt-0.5"
+                      })}
+                      <span className="text-sm">{item.text}</span>
                     </li>
                   ))}
                 </ul>
@@ -220,11 +257,11 @@ const GetQuote = () => {
                     <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
                       <Phone className="w-5 h-5 text-primary" />
                     </div>
-                    <a href="tel:1-275-915-4200" className="font-semibold hover:text-primary transition-colors">
+                    <a href="tel:1-275-915-4200" className="font-semibold relative nav-link transition-colors">
                       1-275-915-4200
                     </a>
                   </div>
-                  <div className="flex items-start gap-2">
+                  <div className="flex items-center gap-2">
                     <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                       <Clock className="w-5 h-5 text-primary" />
                     </div>

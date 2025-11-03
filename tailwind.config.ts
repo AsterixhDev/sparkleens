@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
 
 export default {
@@ -5,6 +6,9 @@ export default {
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
+    fontFamily: {
+      sans: ['Poppins', 'sans-serif'],
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -13,6 +17,9 @@ export default {
       },
     },
     extend: {
+      backgroundImage: {
+        'hero-gradient': 'linear-gradient(139.11deg, rgb(246 247 249 / 0.5) 46.4%, rgb(108 192 112 / 0.5) 68.86%, rgb(59 175 218 / 0.5) 80.1%)',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

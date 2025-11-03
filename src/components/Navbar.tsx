@@ -1,48 +1,132 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { useState } from "react";
 
 const Navbar = () => {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
   
   return (
     <nav className="sticky top-0 z-50 bg-background border-b border-border">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 text-xl font-bold text-secondary">
-            <Sparkles className="w-6 h-6" />
+          <Link to="/" className="flex items-center gap-2 text-xl font-bold">
+            <span className="text-[#00B3FF]">✧</span>
             <span>Sparkleens</span>
           </Link>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-6">
             <Link 
               to="/" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
+              className="nav-link text-foreground font-medium"
             >
               Home
             </Link>
             <Link 
-              to="/how-we-work" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
+              to="/about" 
+              className="nav-link text-foreground font-medium"
+            >
+              About
+            </Link>
+            <Link 
+              to="/#how-we-work" 
+              className="nav-link text-foreground font-medium"
             >
               How we work
             </Link>
             <Link 
-              to="/services" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
+              to="/#services" 
+              className="nav-link text-foreground font-medium"
             >
-              services
+              Services
+            </Link>
+            <Link 
+              to="/contact" 
+              className="nav-link text-foreground font-medium"
+            >
+              Contact
             </Link>
           </div>
 
-          {/* CTA Button */}
-          <Link to="/get-quote">
-            <Button className="bg-primary hover:bg-primary-hover text-primary-foreground rounded-full px-6">
-              Get Quote
+          <div className="flex items-center gap-4">
+            {/* CTA Button */}
+            <Button asChild className="bg-[#7CC576] hover:bg-[#7CC576]/90 text-white rounded-md px-6">
+              <Link to="/get-quote">
+                Get Quote
+              </Link>
             </Button>
-          </Link>
+
+            {/* Mobile Menu Button */}
+            <Drawer open={isOpen} onOpenChange={setIsOpen}>
+              <DrawerTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  className="md:hidden"
+                >
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </DrawerTrigger>
+              <DrawerContent>
+                <div className="px-4 py-6">
+                  <div className="flex flex-col space-y-4">
+                    <Link 
+                      to="/" 
+                      className="text-foreground font-medium text-lg py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Home
+                    </Link>
+                    <Link 
+                      to="/about" 
+                      className="text-foreground font-medium text-lg py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      About
+                    </Link>
+                    <Link 
+                      to="/#how-we-work" 
+                      className="text-foreground font-medium text-lg py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      How we work
+                    </Link>
+                    <Link 
+                      to="/#services" 
+                      className="text-foreground font-medium text-lg py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Services
+                    </Link>
+                    <Link 
+                      to="/contact" 
+                      className="text-foreground font-medium text-lg py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Contact
+                    </Link>
+                  </div>
+                  <DrawerClose className="mt-6 w-full">
+                    <Button 
+                      className="w-full bg-[#7CC576] hover:bg-[#7CC576]/90 text-white rounded-md"
+                    >
+                      Close Menu
+                    </Button>
+                  </DrawerClose>
+                </div>
+              </DrawerContent>
+            </Drawer>
+          </div>
         </div>
       </div>
     </nav>

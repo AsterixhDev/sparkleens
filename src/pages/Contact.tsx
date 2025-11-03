@@ -37,9 +37,9 @@ const Contact = () => {
       
       {/* Hero Section */}
       <section className="bg-section-light py-16">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-secondary font-semibold mb-2">Get in touch</p>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        <div className="container mx-auto px-4 text-center flex flex-col items-center justify-center gap-3">
+          <p className="text-secondary font-semibold bg-secondary/20 w-fit py-3 px-5 rounded-full">Get in touch</p>
+          <h1 className="text-4xl md:text-5xl font-bold">
             Ready To Get <span className="text-primary">Started?</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -51,7 +51,7 @@ const Contact = () => {
       {/* Contact Section */}
       <section className="py-16 flex-grow">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 items-center md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Left: Contact Info Cards */}
             <div className="space-y-6">
               {/* Call Us */}
