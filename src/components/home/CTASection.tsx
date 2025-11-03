@@ -5,7 +5,7 @@ import BgMask from "../ui/bg-mask";
 
 const CTASection = () => {
   return (
-    <section className="relative isolate py-16 bg-cover bg-center bg-secondary flex flex-col items-center justify-center gap-3">
+    <section className="relative isolate py-16 bg-[#00B3FF] flex flex-col items-center justify-center gap-3">
       <BgMask
         maskSource={{
           // mask shape - place this file under public/shapes or adjust path as needed

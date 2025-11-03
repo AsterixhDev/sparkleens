@@ -1,136 +1,62 @@
-import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { useState } from "react";
+import { Button } from "@/components/ui/button"
+import { Menu, X } from "lucide-react"
+import { Link } from "react-router-dom"
+import { useState } from "react"
 
 const Navbar = () => {
-  const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
-  
+  const [open, setOpen] = useState(false)
+
+  const closeMenu = () => setOpen(false)
+
   return (
     <nav className="sticky top-0 z-50 bg-background border-b border-border">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 text-xl font-bold">
             <span className="text-[#00B3FF]">✧</span>
             <span>Sparkleens</span>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            <Link 
-              to="/" 
-              className="nav-link text-foreground font-medium"
-            >
-              Home
-            </Link>
-            <Link 
-              to="/about" 
-              className="nav-link text-foreground font-medium"
-            >
-              About
-            </Link>
-            <Link 
-              to="/#how-we-work" 
-              className="nav-link text-foreground font-medium"
-            >
-              How we work
-            </Link>
-            <Link 
-              to="/#services" 
-              className="nav-link text-foreground font-medium"
-            >
-              Services
-            </Link>
-            <Link 
-              to="/contact" 
-              className="nav-link text-foreground font-medium"
-            >
-              Contact
-            </Link>
-          </div>
+            <Link to="/" className="nav-link font-medium">Home</Link>
+            <Link to="/about" className="nav-link font-medium">About</Link>
+            <Link to="/#how-we-work" className="nav-link font-medium">How we work</Link>
+            <Link to="/#services" className="nav-link font-medium">Services</Link>
+            <Link to="/contact" className="nav-link font-medium">Contact</Link>
 
-          <div className="flex items-center gap-4">
-            {/* CTA Button */}
-            <Button asChild className="bg-[#7CC576] hover:bg-[#7CC576]/90 text-white rounded-md px-6">
-              <Link to="/get-quote">
-                Get Quote
-              </Link>
+            <Button asChild className="bg-[#7CC576] hover:bg-[#7CC576]/90 text-white px-6">
+              <Link to="/get-quote">Get Quote</Link>
             </Button>
-
-            {/* Mobile Menu Button */}
-            <Drawer open={isOpen} onOpenChange={setIsOpen}>
-              <DrawerTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  className="md:hidden"
-                >
-                  <Menu className="h-6 w-6" />
-                  <span className="sr-only">Toggle menu</span>
-                </Button>
-              </DrawerTrigger>
-              <DrawerContent>
-                <div className="px-4 py-6">
-                  <div className="flex flex-col space-y-4">
-                    <Link 
-                      to="/" 
-                      className="text-foreground font-medium text-lg py-2"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Home
-                    </Link>
-                    <Link 
-                      to="/about" 
-                      className="text-foreground font-medium text-lg py-2"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      About
-                    </Link>
-                    <Link 
-                      to="/#how-we-work" 
-                      className="text-foreground font-medium text-lg py-2"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      How we work
-                    </Link>
-                    <Link 
-                      to="/#services" 
-                      className="text-foreground font-medium text-lg py-2"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Services
-                    </Link>
-                    <Link 
-                      to="/contact" 
-                      className="text-foreground font-medium text-lg py-2"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Contact
-                    </Link>
-                  </div>
-                  <DrawerClose className="mt-6 w-full">
-                    <Button 
-                      className="w-full bg-[#7CC576] hover:bg-[#7CC576]/90 text-white rounded-md"
-                    >
-                      Close Menu
-                    </Button>
-                  </DrawerClose>
-                </div>
-              </DrawerContent>
-            </Drawer>
           </div>
+
+          <button
+            aria-expanded={open}
+            aria-label="Toggle menu"
+            className="md:hidden"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-all duration-300 md:hidden ${open ? "max-h-[500px] pt-4 pb-6" : "max-h-0"}`}
+        >
+          <div className="flex flex-col space-y-5 text-lg font-medium">
+            <Link to="/" className="nav-link" onClick={closeMenu}>Home</Link>
+            <Link to="/about" className="nav-link" onClick={closeMenu}>About</Link>
+            <Link to="/#how-we-work" className="nav-link" onClick={closeMenu}>How we work</Link>
+            <Link to="/#services" className="nav-link" onClick={closeMenu}>Services</Link>
+            <Link to="/contact" className="nav-link" onClick={closeMenu}>Contact</Link>
+          </div>
+
+          <Button asChild className="mt-6 w-full bg-[#7CC576] hover:bg-[#7CC576]/90 text-white">
+            <Link to="/get-quote" onClick={closeMenu}>Get Quote</Link>
+          </Button>
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
