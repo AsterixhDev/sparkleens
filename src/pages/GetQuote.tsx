@@ -1,289 +1,237 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import BlobBackground from "@/components/ui/blob-background";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { BadgeDollarSign, Stars, ClipboardCheck, Clock, Phone, Hourglass } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  BadgeDollarSign,
+  Stars,
+  ClipboardCheck,
+  Clock,
+  Phone,
+  Hourglass,
+} from "lucide-react";
+import Layout from "@/components/Layout";
 import { useToast } from "@/hooks/use-toast";
 
 const GetQuote = () => {
   const { toast } = useToast();
-  const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
+    name: "",
     phone: "",
-    company: "",
-    serviceType: "",
+    email: "",
     propertyType: "",
-    squareFootage: "",
-    frequency: "",
-    details: "",
+    size: "",
+    desiredDate: "",
+    notes: "",
   });
 
-  // Auto-fill service type based on URL parameter
-  useEffect(() => {
-    const type = searchParams.get('type');
-    if (type) {
-      setFormData(prev => ({ ...prev, serviceType: type }));
-      
-      // Auto-select suggested property type based on service
-      if (type === 'office') {
-        setFormData(prev => ({ ...prev, propertyType: 'office' }));
-      } else if (type === 'home') {
-        setFormData(prev => ({ ...prev, propertyType: 'house' }));
-      }
-    }
-  }, [searchParams]);
+  const handleChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement form submission logic
+    // Simple UX placeholder; real submission can be wired to an API later
     toast({
-      title: "Quote Request Submitted!",
-      description: "We'll contact you within 24 hours with a customized quote.",
+      title: "Quote Request Submitted",
+      description:
+        "Thanks — we will provide a customized quote within 24 hours.",
+    });
+    setFormData({
+      name: "",
+      phone: "",
+      email: "",
+      propertyType: "",
+      size: "",
+      desiredDate: "",
+      notes: "",
     });
   };
 
-  const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      
-      {/* Hero Section */}
-      <section className="bg-section-light py-16">
-        <div className="container mx-auto px-4 text-center">
+    <Layout>
+            {/* Hero Section */}
+      <section className="relative bg-section-light py-16 overflow-hidden">
+        <BlobBackground />
+        <div className="container relative mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Get Your <span className="text-primary">Free Quote</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg max-w-2xl mx-auto">
             Tell us about your cleaning needs and we'll provide a customized quote within 24 hours
           </p>
         </div>
       </section>
 
-      {/* Form Section */}
-      <section className="py-16 flex-grow">
+      <section className="py-16 max-w-5xl mx-auto">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto items-center">
             {/* Left: Form */}
-            <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold text-secondary mb-6">Request Quote</h2>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="fullName">Full Name *</Label>
-                    <Input 
-                      id="fullName"
-                      placeholder="Enter your fullname"
-                      value={formData.fullName}
-                      onChange={(e) => handleChange("fullName", e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input 
-                      id="email"
-                      type="email"
-                      placeholder="Enter your email"
-                      value={formData.email}
-                      onChange={(e) => handleChange("email", e.target.value)}
-                      required
-                    />
-                  </div>
-                </div>
+            <div>
+              <h2 className="text-2xl font-bold text-secondary mb-6">
+                Get Your Free Quote
+              </h2>
 
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="phone">Phone Number *</Label>
-                    <Input 
+                    <Label htmlFor="name">Name *</Label>
+                    <Input
+                      id="name"
+                      placeholder="Full name"
+                      value={formData.name}
+                      onChange={(e) => handleChange("name", e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="phone">Phone *</Label>
+                    <Input
                       id="phone"
-                      placeholder="+1 44 xxxx xx"
+                      placeholder="(470) 227-1318"
                       value={formData.phone}
                       onChange={(e) => handleChange("phone", e.target.value)}
                       required
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="company">Company/Organization</Label>
-                    <Input 
-                      id="company"
-                      placeholder=""
-                      value={formData.company}
-                      onChange={(e) => handleChange("company", e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="serviceType">Service Type *</Label>
-                    <Select 
-                      value={formData.serviceType}
-                      onValueChange={(value) => handleChange("serviceType", value)}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a service type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="home">Standard Home Cleaning</SelectItem>
-                        <SelectItem value="office">Office and Workspace Cleaning</SelectItem>
-                        <SelectItem value="deep">Deep Move in/out Cleaning</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label htmlFor="propertyType">Property Type</Label>
-                    <Select 
-                      value={formData.propertyType}
-                      onValueChange={(value) => handleChange("propertyType", value)}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a property type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="apartment">Apartment</SelectItem>
-                        <SelectItem value="house">House</SelectItem>
-                        <SelectItem value="office">Office</SelectItem>
-                        <SelectItem value="commercial">Commercial Space</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="squareFootage">Approximate Square Footage</Label>
-                    <Input 
-                      id="squareFootage"
-                      placeholder="e.g 2000 sq ft"
-                      value={formData.squareFootage}
-                      onChange={(e) => handleChange("squareFootage", e.target.value)}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="frequency">Cleaning Frequency</Label>
-                    <Select onValueChange={(value) => handleChange("frequency", value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="select frequency" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="once">One-time</SelectItem>
-                        <SelectItem value="weekly">Weekly</SelectItem>
-                        <SelectItem value="biweekly">Bi-weekly</SelectItem>
-                        <SelectItem value="monthly">Monthly</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="details">Additional Details *</Label>
-                  <Textarea 
-                    id="details"
-                    placeholder="Please describe any specific requirements, areas of focus, or questions you have..."
-                    rows={5}
-                    value={formData.details}
-                    onChange={(e) => handleChange("details", e.target.value)}
+                  <Label htmlFor="email">Email *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={formData.email}
+                    onChange={(e) => handleChange("email", e.target.value)}
                     required
                   />
                 </div>
 
-                <Button 
-                  type="submit" 
+                <div>
+                  <Label htmlFor="propertyType">Property Type *</Label>
+                  <Select
+                    value={formData.propertyType}
+                    onValueChange={(value) =>
+                      handleChange("propertyType", value)
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select property type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Residential">Residential</SelectItem>
+                      <SelectItem value="Airbnb">Airbnb</SelectItem>
+                      <SelectItem value="Commercial">Commercial</SelectItem>
+                      <SelectItem value="Post-Construction">
+                        Post-Construction
+                      </SelectItem>
+                      <SelectItem value="Estate">Estate</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="size">Square Footage or Room Count</Label>
+                    <Input
+                      id="size"
+                      placeholder="e.g. 1500 sq ft or 3 beds"
+                      value={formData.size}
+                      onChange={(e) => handleChange("size", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="desiredDate">Desired Date</Label>
+                    <Input
+                      id="desiredDate"
+                      type="date"
+                      value={formData.desiredDate}
+                      onChange={(e) =>
+                        handleChange("desiredDate", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="notes">Notes or Special Requests</Label>
+                  <Textarea
+                    id="notes"
+                    rows={4}
+                    placeholder="Any special instructions or requests"
+                    value={formData.notes}
+                    onChange={(e) => handleChange("notes", e.target.value)}
+                  />
+                </div>
+
+                <Button
+                  type="submit"
                   size="lg"
-                  className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full"
+                  className="w-full bg-primary hover:bg-primary-hover text-primary-foreground rounded-full"
                 >
-                  Get Free Quote
+                  Request Quote
                 </Button>
               </form>
             </div>
 
-            {/* Right: Info Boxes */}
+            {/* Right: Info panel */}
             <div className="space-y-6">
-              {/* Why Choose Our Quote Process */}
-              <div className="bg-info-cyan border border-secondary/20 rounded-2xl p-6">
-                <h3 className="font-bold text-lg mb-4">
-                  Why Choose Our <span className="text-secondary">Quote Process?</span>
+              <div className="p-6 rounded-2xl border bg-primary/20">
+                <h3 className="font-bold text-lg mb-3">
+                  Why choose <b className="text-primary">Broome Service Solutions</b>?
                 </h3>
-                <ul className="space-y-3">
-                  {[
-                    {
-                      icon: BadgeDollarSign,
-                      text: "Free, no-obligation quote"
-                    },
-                    {
-                      icon: Stars,
-                      text: "Expert consultation included"
-                    },
-                    {
-                      icon: ClipboardCheck,
-                      text: "Customized service plans"
-                    },
-                    {
-                      icon: Hourglass,
-                      text: "Response within 24 hours"
-                    }
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-center gap-2">
-                      {React.createElement(item.icon, {
-                        className: "w-5 h-5 text-secondary flex-shrink-0 mt-0.5"
-                      })}
-                      <span className="text-sm">{item.text}</span>
-                    </li>
-                  ))}
+                <ul className="space-y-4 text-sm">
+                  <li className="flex items-center gap-2">
+                    <BadgeDollarSign className="w-5 h-5 text-primary" />{" "}
+                    Free, no-obligation quote
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Stars className="w-5 h-5 text-primary" />{" "}
+                    Experienced, vetted cleaners
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <ClipboardCheck className="w-5 h-5 text-primary" />{" "}
+                    Customized cleaning plans
+                  </li>
                 </ul>
               </div>
 
-              {/* Need Immediate Assistance */}
-              <div className="bg-info-green border border-primary/20 rounded-2xl p-6">
-                <h3 className="font-bold text-lg mb-4">
-                  Need Immediate <span className="text-primary">Assistance?</span>
-                </h3>
-                <p className="text-sm mb-4">
-                  Call us directly for urgent cleaning needs or to speak with our team immediately.
-                </p>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                      <Phone className="w-5 h-5 text-primary" />
-                    </div>
-                    <a href="tel:1-275-915-4200" className="font-semibold relative nav-link transition-colors">
-                      1-275-915-4200
-                    </a>
+              <div className="p-6 rounded-2xl border bg-accent/30">
+                <h3 className="font-bold text-lg mb-3">Contact & Hours</h3>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-accent" />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="text-sm">
-                      <p className="font-semibold">Mon - Sat: 8:00 AM - 6:00 PM</p>
-                    </div>
+                  <a href="tel:+14702271318" className="font-semibold">
+                    (470) 227-1318
+                  </a>
+                </div>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+                    <Clock className="w-5 h-5 text-accent" />
+                  </div>
+                  <div>
+                    <p className="font-semibold">Mon–Sat: 8 AM – 7 PM</p>
+                    <p className="text-sm">Sun: 10 AM — 6 PM</p>
                   </div>
                 </div>
-                <Button 
-                  className="w-full mt-4 bg-primary hover:bg-primary-hover text-primary-foreground rounded-full"
-                  asChild
-                >
-                  <a href="tel:1-275-915-4200">Call Now</a>
-                </Button>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </Layout>
   );
 };
 

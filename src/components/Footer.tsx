@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#00B3FF] text-white">
+  <footer className="bg-primary text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 text-xl font-bold mb-4">
               <span className="text-white">✧</span>
-              <span>Sparkleens</span>
+              <span>Broome Service Solutions</span>
             </div>
             <p className="text-sm leading-relaxed mb-4">
               You get reliable cleaning for homes, offices, and commercial spaces. We focus on consistency, accountability, and measurable hygiene standards. Our cleaners follow strict checklists and verified procedures. Clients stick with us because results are uniform each visit.
@@ -80,7 +80,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-          <p>©{new Date().getFullYear()} <span className="font-medium">Sparkleens</span>. All Rights Reserved</p>
+          <p>©{new Date().getFullYear()} <span className="font-medium">Broome Service Solutions</span>. All Rights Reserved</p>
           <div className="flex gap-4">
             <Link to="/privacy" className="hover:text-white/80 transition-colors">
               Privacy Policy

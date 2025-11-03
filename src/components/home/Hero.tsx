@@ -31,9 +31,9 @@ const Hero = () => {
           {/* Right: Image Grid */}
           <div className="w-full max-w-md">
             <GroupImageFill
-              src1="/hero-2.jpg"
-              src2="/hero-3.jpg"
-              src3="/hero-4.jpg"
+              src1="/hero-1.jpg"
+              src2="/hero-2.jpg"
+              src3="/hero-3.jpg"
               // keep natural aspect and make it responsive to the container
               wrapperProps={{
                 className: "w-full rounded-xl overflow-hidden",

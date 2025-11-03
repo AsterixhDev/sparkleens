@@ -59,26 +59,32 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 220 13% 20%;
 
-    /* Primary: Fresh Green for CTAs */
-    --primary: 120 45% 56%;
-    --primary-foreground: 0 0% 100%;
-    --primary-hover: 120 45% 48%;
+  /* Primary: Friendly, slightly lighter brand blue for an inviting, professional look */
+  /* brighter and slightly more saturated so it reads well on light backgrounds and in small UI elements */
+  --primary: 214 68% 30%; /* ~#1A4B73 */
+  --primary-foreground: 0 0% 100%;
+  --primary-hover: 214 68% 26%;
 
-    /* Secondary: Professional Cyan */
-    --secondary: 189 52% 50%;
-    --secondary-foreground: 0 0% 100%;
+  /* Secondary: muted slate for subheadings and chips but darker than pale greys for readability */
+  --secondary: 214 12% 46%; /* softened slate for headings */
+  --secondary-foreground: 220 13% 20%;
 
     /* Muted backgrounds */
     --muted: 210 40% 96.1%;
-    --muted-foreground: 220 13% 46%;
+    /* slightly darker muted foreground for legibility on muted surfaces */
+    --muted-foreground: 220 13% 54%;
 
-    /* Accent: Cyan for highlights */
-    --accent: 189 52% 50%;
-    --accent-foreground: 0 0% 100%;
+  /* Accent: fresh mint-green for CTAs and highlights (brighter / cleaner feel) */
+  --accent: 162 55% 52%; /* minty green */
+  --accent-foreground: 0 0% 100%;
 
-    /* Light blue background sections */
-    --section-bg-light: 189 50% 96%;
-    --section-bg-light-green: 122 39% 95%;
+  /* Accent: Mint Green for CTAs and highlights */
+  --accent: 160 50% 57%; /* #5AC8A2 approx */
+  --accent-foreground: 0 0% 100%;
+
+  /* Light blue/green background sections for an airy cleaning feel */
+  --section-bg-light: 210 40% 96.5%; /* very pale cool blue */
+  --section-bg-light-green: 150 40% 96.5%; /* very pale cool green */
 
     /* Info boxes */
     --info-cyan: 189 60% 90%;

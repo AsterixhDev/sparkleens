@@ -10,25 +10,25 @@ import {
 import { Link } from "react-router-dom";
 import serviceImage from "@/assets/service-card.jpg";
 
-const ServicesSection = () => {
+const ServicesSection = ({hasHeadline=true}:{hasHeadline?:boolean}) => {
   const services = [
     {
       title: "Standard Home Cleaning",
       description:
         "Weekly or one off cleaning for homes. You get clean floors, clean surfaces, and fresh hygienic air.",
-      image: serviceImage,
+      image: '/service-image-1.jpg',
     },
     {
       title: "Office and Workspace Cleaning",
       description:
         "Cleaning routine that keeps your office floor, desks, and shared areas hygienically maintained. You reduce dust and reduce sickness downtime.",
-      image: serviceImage,
+      image: '/service-image-2.jpg',
     },
     {
       title: "Deep Move in and Move Out Cleaning",
       description:
         "Heavy cleaning for spaces before moving in or after moving out. You get detailed scrubbing, stain removal, and intensive sanitation.",
-      image: serviceImage,
+      image: '/service-image-3.jpg',
     },
   ];
 
@@ -36,15 +36,17 @@ const ServicesSection = () => {
     <section className="py-16 md:py-24 bg-primary/10">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Cleaning <span className="text-primary">services</span> you select
-            with clarity.
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            You choose a service, we quote based on exact need.
-          </p>
-        </div>
+        {hasHeadline && (
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Cleaning <span className="text-accent">services</span> you select
+              with clarity.
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              You choose a service, we quote based on exact need.
+            </p>
+          </div>
+        )}
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -57,10 +59,10 @@ const ServicesSection = () => {
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-48 object-cover rounded-md"
+                  className="w-full h-48 object-cover object-top rounded-md"
                 />
                 <CardHeader className="p-0">
-                  <CardTitle className="text-xl text-secondary">
+                  <CardTitle className="text-xl text-primary">
                     {service.title}
                   </CardTitle>
                 </CardHeader>

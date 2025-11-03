@@ -1,0 +1,163 @@
+import React, { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Check } from "lucide-react";
+import Layout from "@/components/Layout";
+import BlobBackground from "@/components/ui/blob-background";
+
+const Memberships = () => {
+  useEffect(() => {
+    // SEO meta updates
+    const setMeta = (name: string, content: string) => {
+      let el = document.querySelector(`meta[name="${name}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute("name", name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    setMeta(
+      "description",
+      "Save more with Broome Service Solutions memberships. Choose weekly, bi-weekly, or custom cleaning plans and enjoy exclusive discounts."
+    );
+    setMeta(
+      "keywords",
+      "cleaning memberships Atlanta, recurring cleaning plans, professional house cleaning subscriptions"
+    );
+  }, []);
+
+  const membershipTiers = [
+    {
+      title: "Silver Plan",
+      description: "Perfect for busy professionals",
+      features: [
+        "Bi-weekly cleaning",
+        "10% off add-ons",
+        "Priority scheduling",
+      ],
+      highlight: false,
+    },
+    {
+      title: "Gold Plan",
+      description: "Our most popular membership",
+      features: [
+        "Weekly cleaning",
+        "15% off add-ons",
+        "Free interior appliance clean every month",
+      ],
+      highlight: true,
+    },
+    {
+      title: "Platinum Plan",
+      description: "Ultimate flexibility and savings",
+      features: [
+        "Custom schedule",
+        "20% off add-ons",
+        "Free quarterly deep clean",
+        "Free ozone treatment",
+      ],
+      highlight: false,
+    },
+  ];
+
+  return (
+    <Layout>
+      {/* Hero Section */}
+      <section className="relative bg-section-light py-16 overflow-hidden">
+        <BlobBackground />{" "}
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              <b className="text-accent">BSS</b> Memberships
+            </h1>
+            <p className="text-lg max-w-2xl mx-auto">
+              Join our membership program for consistent cleaning and exclusive
+              perks. Designed for homeowners, busy professionals, and frequent
+              clients who want peace of mind all year long.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Membership Tiers Section */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {membershipTiers.map((tier, index) => (
+              <Card
+                key={index}
+                className={`flex flex-col ${
+                  tier.highlight ? "border-primary shadow-lg md:scale-105" : ""
+                }`}
+              >
+                <CardHeader className="text-center">
+                  <CardTitle className="text-2xl font-bold text-secondary">
+                    {tier.title}
+                  </CardTitle>
+                  <p className="text-muted-foreground">{tier.description}</p>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <ul className="space-y-4">
+                    {tier.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <Button
+                    className="w-full rounded-full"
+                    variant={tier.highlight ? "default" : "outline"}
+                  >
+                    Join Now
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+
+          {/* CTA Section */}
+          <div className="mt-16 text-center bg-primary/10 p-8 rounded-lg max-w-3xl mx-auto relative isolate overflow-hidden">
+            <h3 className="text-2xl font-bold mb-2 relative">
+              Start saving on every clean
+            </h3>
+            <p className="text-muted-foreground mb-6 relative">
+              Join now and let us take care of your cleaning needs all year
+              round.
+            </p>
+            <Button size="lg" className="rounded-full relative">
+              Join Now
+            </Button>
+
+            {/* Decorative wave background at the bottom of the CTA */}
+            <svg
+              className="absolute -z-10 left-0 bottom-0 w-full h-28 pointer-events-none"
+              viewBox="0 0 900 600"
+              preserveAspectRatio="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M0 234L21.5 230.2C43 226.3 86 218.7 128.8 229.3C171.7 240 214.3 269 257.2 298.3C300 327.7 343 357.3 385.8 349.7C428.7 342 471.3 297 514.2 266.3C557 235.7 600 219.3 642.8 210.8C685.7 202.3 728.3 201.7 771.2 212C814 222.3 857 243.7 878.5 254.3L900 265L900 601L878.5 601C857 601 814 601 771.2 601C728.3 601 685.7 601 642.8 601C600 601 557 601 514.2 601C471.3 601 428.7 601 385.8 601C343 601 300 601 257.2 601C214.3 601 171.7 601 128.8 601C86 601 43 601 21.5 601L0 601Z"
+                fill="#1A4B73"
+                fillOpacity="0.5"
+              />
+            </svg>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default Memberships;

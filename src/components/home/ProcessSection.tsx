@@ -1,45 +1,68 @@
+import React, { useEffect } from "react";
 import GroupImageFill from "../ui/GroupImageFill";
 
-const ProcessSection = () => {
+const ProcessSection = ({hasHeadline=true}:{hasHeadline?:boolean}) => {
   const steps = [
     {
       number: 1,
-      title: "Share your cleaning needs",
-      description: "Tell us your space type, size and frequency needs.",
+      title: "Request a Quote",
+      description: "Tell us your cleaning needs online.",
     },
     {
       number: 2,
-      title: "We review and match a plan",
-      description: "We use your details to match the right cleaning package.",
+      title: "Receive a Custom Estimate",
+      description: "Get your tailored quote within 24 hours.",
     },
     {
       number: 3,
-      title: "Cleaning team gets to work",
-      description:
-        "We schedule your preferred time and complete the cleaning professionally",
+      title: "Book Your Clean",
+      description: "Confirm your date and service.",
+    },
+    {
+      number: 4,
+      title: "Relax & Review",
+      description: "Enjoy a spotless result every time.",
     },
   ];
 
+  useEffect(() => {
+    // SEO meta updates for the process section (helpful when this section is a primary page component)
+    const setMeta = (name: string, content: string) => {
+      let el = document.querySelector(`meta[name="${name}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute("name", name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    setMeta("description", "Discover how Broome Service Solutions delivers smooth, reliable cleaning from quote to completion.");
+    setMeta(
+      "keywords",
+      "cleaning process, how cleaning services work, booking cleaning online, Atlanta cleaners"
+    );
+  }, []);
+
   return (
-    <section id="how-we-work" className="py-16 md:py-24 bg-background">
+    <section id="how-we-work" className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        {hasHeadline&&<div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Get amazing cleaning in{" "}
-            <span className="text-primary">3 simple steps</span>
+            Simple. Streamlined. Stress-Free.
           </h2>
           <p className="text-muted-foreground text-lg">
             You get transparent steps and fast results you understand and
             control.
           </p>
-        </div>
+        </div>}
 
         {/* Process Grid */}
         {/* Layout: row on wide screens, stack column on small screens (<=498px) */}
-        <div className="flex items-center justify-center flex-col sm:flex-row sm:items-center">
+        <div className="flex items-center max-w-5xl mx-auto justify-center flex-col sm:flex-row sm:items-center">
           {/* Left: Images */}
-          <div className="w-[80%] sm:w-full">
+          <div className="w-[70%] sm:w-full">
             <GroupImageFill
               src1="/process-1.jpg"
               src2="/process-2.jpg"
@@ -49,7 +72,7 @@ const ProcessSection = () => {
           </div>
 
           {/* Right: Steps */}
-          <div className="relative space-y-8 w-fit sm:max-w-[60%] md:max-w-[50%] sm:ml-12 mt-12 sm:mt-0 shrink-0">
+          <div className="relative space-y-8 w-fit sm:w-[60%] md:w-[50%] sm:ml-12 mt-12 sm:mt-0 shrink-0">
             {/* Vertical line connector */}
             <div className="absolute left-[23px] top-[48px] w-0.5 h-[calc(100%-72px)] bg-gradient-to-b from-secondary/50 to-primary/50 z-0" />
             

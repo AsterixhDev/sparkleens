@@ -18,7 +18,7 @@ export default {
     },
     extend: {
       backgroundImage: {
-        'hero-gradient': 'linear-gradient(139.11deg, rgb(246 247 249 / 0.5) 46.4%, rgb(108 192 112 / 0.5) 68.86%, rgb(59 175 218 / 0.5) 80.1%)',
+        'hero-gradient': 'linear-gradient(139.11deg, hsl(var(--background) / 0.98) 46.4%, hsl(var(--accent) / 0.15) 68.86%, hsl(var(--primary) / 0.25) 80.1%)',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -27,9 +27,9 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "hsl(var(--primary) / <alpha-value>)",
           foreground: "hsl(var(--primary-foreground))",
-          hover: "hsl(var(--primary-hover))",
+          hover: "hsl(var(--primary-hover) / <alpha-value>)",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -44,7 +44,7 @@ export default {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
+          DEFAULT: "hsl(var(--accent) / <alpha-value>)",
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
