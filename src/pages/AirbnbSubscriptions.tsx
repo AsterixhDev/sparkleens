@@ -72,7 +72,7 @@ const AirbnbSubscriptions = () => {
 
   return (
     <Layout>
-      <div className="pt-20">
+      <div>
         {/* Hero Section */}
         <section className="relative bg-section-light py-16 overflow-hidden">
           <BlobBackground />

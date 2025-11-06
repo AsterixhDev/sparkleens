@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import GroupImageFill from "../ui/GroupImageFill";
 
-const ProcessSection = ({hasHeadline=true}:{hasHeadline?:boolean}) => {
+const ProcessSection = ({ hasHeadline = true }: { hasHeadline?: boolean }) => {
   const steps = [
     {
       number: 1,
@@ -26,7 +26,6 @@ const ProcessSection = ({hasHeadline=true}:{hasHeadline?:boolean}) => {
   ];
 
   useEffect(() => {
-    // SEO meta updates for the process section (helpful when this section is a primary page component)
     const setMeta = (name: string, content: string) => {
       let el = document.querySelector(`meta[name="${name}"]`);
       if (!el) {
@@ -37,7 +36,10 @@ const ProcessSection = ({hasHeadline=true}:{hasHeadline?:boolean}) => {
       el.setAttribute("content", content);
     };
 
-    setMeta("description", "Discover how Broome Service Solutions delivers smooth, reliable cleaning from quote to completion.");
+    setMeta(
+      "description",
+      "Discover how Broome Service Solutions delivers smooth, reliable cleaning from quote to completion."
+    );
     setMeta(
       "keywords",
       "cleaning process, how cleaning services work, booking cleaning online, Atlanta cleaners"
@@ -45,57 +47,76 @@ const ProcessSection = ({hasHeadline=true}:{hasHeadline?:boolean}) => {
   }, []);
 
   return (
-    <section id="how-we-work" className="py-16 md:py-24">
-      <div className="container mx-auto px-4">
+    <section
+      id="how-we-work"
+      className="
+        relative overflow-hidden
+        bg-gradient-to-b from-white via-sky-50/40 to-blue-50/30
+        py-12 sm:py-16 md:py-24 lg:py-28 xl:py-32
+        px-4 sm:px-6 md:px-10 lg:px-16
+      "
+    >
+      <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
-        {hasHeadline&&<div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Simple. Streamlined. Stress-Free.
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            You get transparent steps and fast results you understand and
-            control.
-          </p>
-        </div>}
+        {hasHeadline && (
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-gray-900">
+              Simple. Streamlined. <span className="text-primary">Stress-Free.</span>
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+              You get transparent steps and fast results you understand and control.
+            </p>
+          </div>
+        )}
 
         {/* Process Grid */}
-        {/* Layout: row on wide screens, stack column on small screens (<=498px) */}
-        <div className="flex items-center max-w-5xl mx-auto justify-center flex-col sm:flex-row sm:items-center">
-          {/* Left: Images */}
-          <div className="w-[70%] sm:w-full">
-            <GroupImageFill
-              src1="/process-1.jpg"
-              src2="/process-2.jpg"
-              src3="/process-3.jpg"
-              flipHorizontal
-            />
+        <div className="flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-0">
+          {/* Left: Image Section */}
+          <div className="w-full md:w-1/2 max-w-lg mx-auto relative">
+            <div className="absolute -inset-4 bg-white/40 rounded-3xl blur-2xl" />
+            <div className="relative rounded-3xl overflow-hidden drop-shadow-md drop-shadow-primary">
+              <GroupImageFill
+                src1="/process-1.jpg"
+                src2="/process-2.jpg"
+                src3="/process-3.jpg"
+                flipHorizontal
+                wrapperProps={{
+                  className: "w-full h-auto rounded-3xl overflow-hidden",
+                }}
+              />
+            </div>
           </div>
 
           {/* Right: Steps */}
-          <div className="relative space-y-8 w-fit sm:w-[60%] md:w-[50%] sm:ml-12 mt-12 sm:mt-0 shrink-0">
-            {/* Vertical line connector */}
-            <div className="absolute left-[23px] top-[48px] w-0.5 h-[calc(100%-72px)] bg-gradient-to-b from-secondary/50 to-primary/50 z-0" />
-            
-            {steps.map((step, index) => (
-              <div key={step.number} className="flex gap-6 relative z-10">
+          <div className="relative w-full md:w-1/2 max-w-xl mx-auto md:mx-0 mt-10 md:mt-0 space-y-10">
+            {/* Vertical connector line */}
+            <div className="absolute left-[27px] top-[48px] w-0.5 h-[calc(100%-72px)] bg-gradient-to-b from-primary/40 to-accent/40 z-0" />
+
+            {steps.map((step) => (
+              <div
+                key={step.number}
+                className="flex gap-6 items-start relative z-10"
+              >
+                {/* Number circle */}
                 <div className="flex-shrink-0">
                   <div className="relative">
-                    {/* Outer ring with gradient border */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-secondary via-primary to-secondary animate-[spin_8s_linear_infinite]" />
-                    {/* Inner circle with background */}
-                    <div className="relative w-12 h-12 rounded-full bg-background border-2 border-transparent flex items-center justify-center">
-                      {/* Number with glowing effect */}
-                      <span className="font-bold text-xl bg-gradient-to-br from-secondary to-primary bg-clip-text text-transparent drop-shadow-[0_0_0.3em_rgba(59,175,218,0.3)]">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-accent to-primary animate-[spin_10s_linear_infinite]" />
+                    <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border-2 border-transparent flex items-center justify-center shadow-md">
+                      <span className="font-bold text-xl sm:text-2xl bg-gradient-to-br from-accent to-primary bg-clip-text text-transparent drop-shadow-[0_0_0.4em_rgba(59,175,218,0.2)]">
                         {step.number}
                       </span>
                     </div>
                   </div>
                 </div>
+
+                {/* Text */}
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-secondary">
+                  <h3 className="text-lg sm:text-xl font-semibold text-secondary mb-1">
                     {step.title}
                   </h3>
-                  <p className="text-muted-foreground">{step.description}</p>
+                  <p className="text-gray-600 text-sm sm:text-base">
+                    {step.description}
+                  </p>
                 </div>
               </div>
             ))}

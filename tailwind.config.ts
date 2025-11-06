@@ -18,7 +18,7 @@ export default {
     },
     extend: {
       backgroundImage: {
-        'hero-gradient': 'linear-gradient(139.11deg, hsl(var(--background) / 0.98) 46.4%, hsl(var(--accent) / 0.15) 68.86%, hsl(var(--primary) / 0.25) 80.1%)',
+        'hero-gradient': 'linear-gradient(135deg, hsl(var(--background) / 0.95) 0%, hsl(var(--accent) / 0.1) 30%, hsl(var(--primary) / 0.15) 60%, hsl(var(--muted) / 0.05) 100%)',
       },
       colors: {
         border: "hsl(var(--border))",
