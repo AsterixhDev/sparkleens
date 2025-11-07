@@ -1,38 +1,38 @@
-import React, { useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import React, { useEffect } from "react"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Check } from "lucide-react";
-import Layout from "@/components/Layout";
-import BlobBackground from "@/components/ui/blob-background";
+} from "@/components/ui/card"
+import { Check } from "lucide-react"
+import Layout from "@/components/Layout"
+import BlobBackground from "@/components/ui/blob-background"
+import { motion, Variants } from "framer-motion"
 
 const AirbnbSubscriptions = () => {
   useEffect(() => {
-    // SEO meta updates
     const setMeta = (name: string, content: string) => {
-      let el = document.querySelector(`meta[name="${name}"]`);
+      let el = document.querySelector(`meta[name="${name}"]`)
       if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute("name", name);
-        document.head.appendChild(el);
+        el = document.createElement("meta")
+        el.setAttribute("name", name)
+        document.head.appendChild(el)
       }
-      el.setAttribute("content", content);
-    };
+      el.setAttribute("content", content)
+    }
 
     setMeta(
       "description",
       "Airbnb turnover subscriptions by Broome Service Solutions - fast, consistent, and 5-star ready. Ideal for busy hosts in Metro Atlanta."
-    );
+    )
     setMeta(
       "keywords",
       "Airbnb cleaning Atlanta, Airbnb turnover service, short-term rental cleaners GA, vacation rental cleaning service"
-    );
-  }, []);
+    )
+  }, [])
 
   const packages = [
     {
@@ -68,16 +68,47 @@ const AirbnbSubscriptions = () => {
       ],
       highlight: false,
     },
-  ];
+  ]
+
+  // ✅ Safe typed Framer Motion variants
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  }
+
+  const containerVariants: Variants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.2,
+      },
+    },
+  }
 
   return (
     <Layout>
       <div>
         {/* Hero Section */}
-        <section className="relative bg-section-light py-24 overflow-hidden">
+        <motion.section
+          className="relative bg-section-light py-24 overflow-hidden"
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+        >
           <BlobBackground />
           <div className="container mx-auto px-4">
-            <div className="text-center">
+            <motion.div
+              className="text-center"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+              variants={fadeUp}
+            >
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 <b className="text-accent">Airbnb Turnover</b> Subscription
                 Packages
@@ -87,51 +118,73 @@ const AirbnbSubscriptions = () => {
                 time. Our Airbnb cleaning subscriptions are designed for hosts
                 who value reliability, speed, and consistency.
               </p>
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Packages Section */}
         <section className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={containerVariants}
+            >
               {packages.map((pkg, index) => (
-                <Card
-                  key={index}
-                  className={`flex flex-col ${
-                    pkg.highlight ? "border-primary shadow-lg md:scale-105" : ""
-                  }`}
-                >
-                  <CardHeader className="text-center">
-                    <CardTitle className="text-2xl font-bold text-secondary">
-                      {pkg.title}
-                    </CardTitle>
-                    <p className="text-muted-foreground">{pkg.description}</p>
-                  </CardHeader>
-                  <CardContent className="flex-grow">
-                    <ul className="space-y-4">
-                      {pkg.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                  <CardFooter>
-                    <Button
-                      className="w-full rounded-full"
-                      variant={pkg.highlight ? "default" : "outline"}
-                    >
-                      Subscribe Today
-                    </Button>
-                  </CardFooter>
-                </Card>
+                <motion.div key={index} variants={fadeUp}>
+                  <Card
+                    className={`flex flex-col transition-transform duration-300 hover:-translate-y-2 ${
+                      pkg.highlight
+                        ? "border-primary shadow-lg md:scale-105"
+                        : "hover:shadow-md"
+                    }`}
+                  >
+                    <CardHeader className="text-center">
+                      <CardTitle className="text-2xl font-bold text-secondary">
+                        {pkg.title}
+                      </CardTitle>
+                      <p className="text-muted-foreground">{pkg.description}</p>
+                    </CardHeader>
+                    <CardContent className="flex-grow">
+                      <ul className="space-y-4">
+                        {pkg.features.map((feature, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                    <CardFooter>
+                      <Button
+                        className="w-full rounded-full"
+                        variant={pkg.highlight ? "default" : "outline"}
+                      >
+                        Subscribe Today
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* CTA Banner */}
-            <div className="relative overflow-hidden isolate mt-16 text-center bg-primary/10 p-8 rounded-lg max-w-3xl mx-auto">
+            <motion.div
+              className="relative overflow-hidden isolate mt-16 text-center bg-primary/10 p-8 rounded-lg max-w-3xl mx-auto"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+              variants={{
+                hidden: { opacity: 0, scale: 0.95 },
+                visible: {
+                  opacity: 1,
+                  scale: 1,
+                  transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+                },
+              }}
+            >
               <h3 className="text-2xl font-bold mb-4 relative">
                 Subscribe Today & Get 20% Off Your First Month
               </h3>
@@ -152,12 +205,12 @@ const AirbnbSubscriptions = () => {
                   fillOpacity="0.5"
                 />
               </svg>
-            </div>
+            </motion.div>
           </div>
         </section>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default AirbnbSubscriptions;
+export default AirbnbSubscriptions
