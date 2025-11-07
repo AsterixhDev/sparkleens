@@ -1,13 +1,9 @@
 import {
-  Facebook,
-  Linkedin,
-  Instagram,
-  MapPin,
-  Phone,
   Mail,
+  Phone
 } from "lucide-react";
-import { SocialIcon } from "react-social-icons";
 import { Link } from "react-router-dom";
+import { SocialIcon } from "react-social-icons";
 
 const Footer = () => {
   const socials = [
@@ -82,26 +78,22 @@ const Footer = () => {
               Contact Us
             </h3>
             <ul className="space-y-3 text-sm text-white/80">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 mt-0.5 text-accent flex-shrink-0" />
-                <span>1289 Little Gateway, East Leopoldo 24929</span>
-              </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-accent flex-shrink-0" />
                 <a
-                  href="tel:1-275-915-4200"
+                  href="tel:+14702271318"
                   className="hover:text-accent transition-colors duration-300"
                 >
-                  1-275-915-4200
+                  (470) 227-1318
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0" />
                 <a
-                  href="mailto:support@broomesolutions.com"
+                  href="mailto:broomeservicesolutions@gmail.com"
                   className="hover:text-accent transition-colors duration-300"
                 >
-                  support@broomesolutions.com
+                  broomeservicesolutions@gmail.com
                 </a>
               </li>
             </ul>
