@@ -50,7 +50,8 @@ const Navbar = () => {
               : "bg-transparent text-white border-transparent" // home + top
             : isScrolled
             ? "bg-background border-border text-foreground shadow-sm" // other + scrolled
-            : "bg-transparent text-foreground border-transparent" // other + top
+            : "bg-transparent text-foreground border-transparent", // other + top
+            open && "!bg-background !border-border !text-foreground !shadow-sm"
         )}
       >
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
