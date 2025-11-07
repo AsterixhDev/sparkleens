@@ -126,7 +126,7 @@ const ProcessSection = ({ hasHeadline = true }: { hasHeadline?: boolean }) => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <div className="relative rounded-3xl overflow-hidden h-fit shadow-md shadow-primary/20">
+            <div className="relative rounded-3xl overflow-hidden h-fit drop-shadow-md drop-shadow-primary/20">
               <GroupImageFill
                 src1="/hero-1.jpg"
                 src2="/process-2.jpg"

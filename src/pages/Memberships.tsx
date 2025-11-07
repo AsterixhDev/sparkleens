@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { motion, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,9 +12,28 @@ import { Check } from "lucide-react";
 import Layout from "@/components/Layout";
 import BlobBackground from "@/components/ui/blob-background";
 
+// ✅ Define smooth framer variants with correct types
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+};
+
 const Memberships = () => {
   useEffect(() => {
-    // SEO meta updates
     const setMeta = (name: string, content: string) => {
       let el = document.querySelector(`meta[name="${name}"]`);
       if (!el) {
@@ -72,62 +92,78 @@ const Memberships = () => {
     <Layout>
       {/* Hero Section */}
       <section className="relative bg-section-light py-24 overflow-hidden">
-        <BlobBackground />{" "}
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              <b className="text-accent">BSS</b> Memberships
-            </h1>
-            <p className="text-lg max-w-2xl mx-auto">
-              Join our membership program for consistent cleaning and exclusive
-              perks. Designed for homeowners, busy professionals, and frequent
-              clients who want peace of mind all year long.
-            </p>
-          </div>
-        </div>
+        <BlobBackground />
+        <motion.div
+          className="container mx-auto px-4 text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.4 }}
+          variants={fadeUp}
+        >
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <b className="text-accent">BSS</b> Memberships
+          </h1>
+          <p className="text-lg max-w-2xl mx-auto">
+            Join our membership program for consistent cleaning and exclusive
+            perks. Designed for homeowners, busy professionals, and frequent
+            clients who want peace of mind all year long.
+          </p>
+        </motion.div>
       </section>
 
       {/* Membership Tiers Section */}
       <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4">
+        <motion.div
+          className="container mx-auto px-4"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {membershipTiers.map((tier, index) => (
-              <Card
-                key={index}
-                className={`flex flex-col ${
-                  tier.highlight ? "border-primary shadow-lg md:scale-105" : ""
-                }`}
-              >
-                <CardHeader className="text-center">
-                  <CardTitle className="text-2xl font-bold text-secondary">
-                    {tier.title}
-                  </CardTitle>
-                  <p className="text-muted-foreground">{tier.description}</p>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <ul className="space-y-4">
-                    {tier.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    className="w-full rounded-full"
-                    variant={tier.highlight ? "default" : "outline"}
-                  >
-                    Join Now
-                  </Button>
-                </CardFooter>
-              </Card>
+              <motion.div key={index} variants={fadeUp}>
+                <Card
+                  className={`flex flex-col ${
+                    tier.highlight
+                      ? "border-primary shadow-lg md:scale-105"
+                      : ""
+                  }`}
+                >
+                  <CardHeader className="text-center">
+                    <CardTitle className="text-2xl font-bold text-secondary">
+                      {tier.title}
+                    </CardTitle>
+                    <p className="text-muted-foreground">{tier.description}</p>
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    <ul className="space-y-4">
+                      {tier.features.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                  <CardFooter>
+                    <Button
+                      className="w-full rounded-full"
+                      variant={tier.highlight ? "default" : "outline"}
+                    >
+                      Join Now
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </motion.div>
             ))}
           </div>
 
           {/* CTA Section */}
-          <div className="mt-16 text-center bg-primary/10 p-8 rounded-lg max-w-3xl mx-auto relative isolate overflow-hidden">
+          <motion.div
+            className="mt-16 text-center bg-primary/10 p-8 rounded-lg max-w-3xl mx-auto relative isolate overflow-hidden"
+            variants={fadeUp}
+          >
             <h3 className="text-2xl font-bold mb-2 relative">
               Start saving on every clean
             </h3>
@@ -139,7 +175,6 @@ const Memberships = () => {
               Join Now
             </Button>
 
-            {/* Decorative wave background at the bottom of the CTA */}
             <svg
               className="absolute -z-10 left-0 bottom-0 w-full h-28 pointer-events-none"
               viewBox="0 0 900 600"
@@ -153,8 +188,8 @@ const Memberships = () => {
                 fillOpacity="0.5"
               />
             </svg>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
     </Layout>
   );
