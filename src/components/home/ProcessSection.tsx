@@ -52,11 +52,11 @@ const ProcessSection = ({ hasHeadline = true }: { hasHeadline?: boolean }) => {
       className="
         relative overflow-hidden
         bg-gradient-to-b from-white via-sky-50/40 to-blue-50/30
-        py-12 sm:py-16 md:py-24 lg:py-28 xl:py-32
-        px-4 sm:px-6 md:px-10 lg:px-16
+        py-6 sm:py-8 md:py-10 lg:py-12 xl:py-14
+        px-4 sm:px-6 md:px-10 lg:px-12
       "
     >
-      <div className="container mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         {hasHeadline && (
           <div className="text-center mb-12 sm:mb-16">
@@ -70,13 +70,12 @@ const ProcessSection = ({ hasHeadline = true }: { hasHeadline?: boolean }) => {
         )}
 
         {/* Process Grid */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-0">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* Left: Image Section */}
           <div className="w-full md:w-1/2 max-w-lg mx-auto relative">
-            <div className="absolute -inset-4 bg-white/40 rounded-3xl blur-2xl" />
-            <div className="relative rounded-3xl overflow-hidden drop-shadow-md drop-shadow-primary">
+            <div className="relative rounded-3xl overflow-hidden h-fit drop-shadow-md drop-shadow-primary">
               <GroupImageFill
-                src1="/process-1.jpg"
+                src1="/hero-1.jpg"
                 src2="/process-2.jpg"
                 src3="/process-3.jpg"
                 flipHorizontal
@@ -88,7 +87,7 @@ const ProcessSection = ({ hasHeadline = true }: { hasHeadline?: boolean }) => {
           </div>
 
           {/* Right: Steps */}
-          <div className="relative w-full md:w-1/2 max-w-xl mx-auto md:mx-0 mt-10 md:mt-0 space-y-10">
+          <div className="relative w-full md:w-1/2 max-w-xl mx-auto md:mx-0 mt-10 md:mt-0 flex flex-col gap-8">
             {/* Vertical connector line */}
             <div className="absolute left-[27px] top-[48px] w-0.5 h-[calc(100%-72px)] bg-gradient-to-b from-primary/40 to-accent/40 z-0" />
 

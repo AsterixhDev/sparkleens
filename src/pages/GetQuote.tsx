@@ -61,7 +61,7 @@ const GetQuote = () => {
   return (
     <Layout>
             {/* Hero Section */}
-      <section className="relative bg-section-light py-16 overflow-hidden">
+      <section className="relative bg-section-light py-24 overflow-hidden">
         <BlobBackground />
         <div className="container relative mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">

@@ -71,7 +71,7 @@ const Memberships = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative bg-section-light py-16 overflow-hidden">
+      <section className="relative bg-section-light py-24 overflow-hidden">
         <BlobBackground />{" "}
         <div className="container mx-auto px-4">
           <div className="text-center">

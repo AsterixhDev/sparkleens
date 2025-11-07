@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -7,35 +7,61 @@
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
+/* 🌈 Custom selection highlight colors */
+::selection {
+  background-color: hsl(var(--accent)); /* Use your accent color */
+  color: hsl(var(--accent-foreground)); /* Contrast text color */
+}
+
+/* Firefox needs its own pseudo-element */
+::-moz-selection {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
 
 @layer components {
   .nav-link {
-    @apply py-1 relative;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.25rem;
+    @apply text-foreground transition-colors duration-300;
   }
 
   .nav-link::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 2px;
+
+    /* 🧩 Use the custom properties from the element */
     background: linear-gradient(
       to right,
-      hsl(var(--primary)) 0%,
-      hsl(var(--secondary)) 50%,
-      hsl(var(--primary)) 100%
+      var(--color1, hsl(var(--primary))) 0%,
+      var(--color2, hsl(var(--secondary))) 50%,
+      var(--color1, hsl(var(--primary))) 100%
     );
+
     background-size: 200% 100%;
     transform: scaleX(0);
     transform-origin: right;
-    transition: transform 0.5s ease;
+    transition: transform 0.4s ease;
     animation: gradientMove 3s linear infinite;
   }
 
   .nav-link:hover::before {
     transform: scaleX(1);
     transform-origin: left;
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
   }
 }
 
@@ -59,32 +85,32 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 220 13% 20%;
 
-  /* Primary: Friendly, slightly lighter brand blue for an inviting, professional look */
-  /* brighter and slightly more saturated so it reads well on light backgrounds and in small UI elements */
-  --primary: 214 68% 30%; /* ~#1A4B73 */
-  --primary-foreground: 0 0% 100%;
-  --primary-hover: 214 68% 26%;
+    /* Primary: Friendly, slightly lighter brand blue for an inviting, professional look */
+    /* brighter and slightly more saturated so it reads well on light backgrounds and in small UI elements */
+    --primary: 214 68% 30%; /* ~#1A4B73 */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 214 68% 26%;
 
-  /* Secondary: muted slate for subheadings and chips but darker than pale greys for readability */
-  --secondary: 214 12% 46%; /* softened slate for headings */
-  --secondary-foreground: 220 13% 20%;
+    /* Secondary: muted slate for subheadings and chips but darker than pale greys for readability */
+    --secondary: 214 12% 46%; /* softened slate for headings */
+    --secondary-foreground: 220 13% 20%;
 
     /* Muted backgrounds */
     --muted: 210 40% 96.1%;
     /* slightly darker muted foreground for legibility on muted surfaces */
     --muted-foreground: 220 13% 54%;
 
-  /* Accent: fresh mint-green for CTAs and highlights (brighter / cleaner feel) */
-  --accent: 162 55% 52%; /* minty green */
-  --accent-foreground: 0 0% 100%;
+    /* Accent: fresh mint-green for CTAs and highlights (brighter / cleaner feel) */
+    --accent: 162 55% 52%; /* minty green */
+    --accent-foreground: 0 0% 100%;
 
-  /* Accent: Mint Green for CTAs and highlights */
-  --accent: 160 50% 57%; /* #5AC8A2 approx */
-  --accent-foreground: 0 0% 100%;
+    /* Accent: Mint Green for CTAs and highlights */
+    --accent: 160 50% 57%; /* #5AC8A2 approx */
+    --accent-foreground: 0 0% 100%;
 
-  /* Light blue/green background sections for an airy cleaning feel */
-  --section-bg-light: 210 40% 96.5%; /* very pale cool blue */
-  --section-bg-light-green: 150 40% 96.5%; /* very pale cool green */
+    /* Light blue/green background sections for an airy cleaning feel */
+    --section-bg-light: 210 40% 96.5%; /* very pale cool blue */
+    --section-bg-light-green: 150 40% 96.5%; /* very pale cool green */
 
     /* Info boxes */
     --info-cyan: 189 60% 90%;

@@ -1,10 +1,21 @@
-import { Facebook, Linkedin, Instagram, MapPin, Phone, Mail } from "lucide-react";
+import {
+  Facebook,
+  Linkedin,
+  Instagram,
+  MapPin,
+  Phone,
+  Mail,
+} from "lucide-react";
+import { SocialIcon } from "react-social-icons";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const socials = [
+    { href: "https://www.yelp.com", label: "Yelp" },
+    { href: "https://www.instagram.com", label: "Instagram" },
+  ];
   return (
     <footer className="relative bg-primary text-white overflow-hidden">
-
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12">
           {/* Company Info */}
@@ -14,38 +25,36 @@ const Footer = () => {
               <span className="drop-shadow-sm">Broome Service Solutions</span>
             </div>
             <p className="text-sm sm:text-base leading-relaxed text-white/80 mb-6 max-w-md">
-              Reliable cleaning for homes, offices, and commercial spaces.
-              We focus on consistency, accountability, and measurable hygiene.
-              Our cleaners follow strict checklists to deliver the same
-              spotless results—every single visit.
+              Reliable cleaning for homes, offices, and commercial spaces. We
+              focus on consistency, accountability, and measurable hygiene. Our
+              cleaners follow strict checklists to deliver the same spotless
+              results—every single visit.
             </p>
             <div className="flex gap-4">
-              {[
-                { href: "https://facebook.com", Icon: Facebook, label: "Facebook" },
-                { href: "https://linkedin.com", Icon: Linkedin, label: "LinkedIn" },
-                { href: "https://instagram.com", Icon: Instagram, label: "Instagram" },
-              ].map(({ href, Icon, label }, i) => (
-                <a
+              {socials.map(({ href, label }, i) => (
+                <SocialIcon
                   key={i}
-                  href={href}
+                  url={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
+                  bgColor="transparent"
                   className="
                     p-2 rounded-full border border-white/20
+                    !size-10
                     hover:border-white/40 hover:bg-white/10 transition-all duration-300
                     text-white/80 hover:text-white
                   "
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
+                />
               ))}
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-lg mb-4 text-white/95">Quick Links</h3>
+            <h3 className="font-semibold text-lg mb-4 text-white/95">
+              Quick Links
+            </h3>
             <ul className="space-y-2 text-sm">
               {[
                 { label: "Home", to: "/" },
@@ -69,7 +78,9 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-semibold text-lg mb-4 text-white/95">Contact Us</h3>
+            <h3 className="font-semibold text-lg mb-4 text-white/95">
+              Contact Us
+            </h3>
             <ul className="space-y-3 text-sm text-white/80">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-0.5 text-accent flex-shrink-0" />
@@ -104,15 +115,23 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/70 mt-6">
           <p>
             © {new Date().getFullYear()}{" "}
-            <span className="font-medium text-white">Broome Service Solutions</span>.{" "}
-            All Rights Reserved.
+            <span className="font-medium text-white">
+              Broome Service Solutions
+            </span>
+            . All Rights Reserved.
           </p>
           <div className="flex gap-4">
-            <Link to="/privacy" className="hover:text-white transition-colors duration-300">
+            <Link
+              to="/privacy"
+              className="hover:text-white transition-colors duration-300"
+            >
               Privacy Policy
             </Link>
             <span className="opacity-40">|</span>
-            <Link to="/terms" className="hover:text-white transition-colors duration-300">
+            <Link
+              to="/terms"
+              className="hover:text-white transition-colors duration-300"
+            >
               Terms of Service
             </Link>
           </div>

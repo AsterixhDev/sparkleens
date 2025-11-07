@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
-import { Link } from "react-router-dom"
-import { useState } from "react"
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { useState, useCallback } from "react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -9,84 +9,114 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
+import useScrollPercent from "@/hooks/useScrollPercent";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false)
-  const closeMenu = () => setOpen(false)
+  const [open, setOpen] = useState(false);
+  const { scrollLength } = useScrollPercent();
+  const { pathname } = useLocation();
+  const isHomePage = pathname === "/";
+
+  const closeMenu = useCallback(() => setOpen(false), []);
+  const toggleMenu = useCallback(() => setOpen((prev) => !prev), []);
+
+  const isScrolled = scrollLength.current > 20;
+
+  const navLink = cn(
+    "font-medium nav-link transition-colors hover:text-primary focus-visible:text-primary",
+    isHomePage
+      ? isScrolled
+        ? "text-foreground" // home + scrolled
+        : "text-white before:[--color1:_hsl(var(--accent))] hover:text-accent focus-visible:text-accent" // home + top
+      : "text-foreground" // other pages
+  );
+
+  const menuItems = [
+    { label: "About", to: "/about" },
+    { label: "Services", to: "/services" },
+    { label: "Contact", to: "/contact" },
+  ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-background border-b border-border">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
+    <>
+      <nav
+        className={cn(
+          "w-full fixed top-0 z-50 border-b transition-all duration-300 ease-in-out",
+          isHomePage
+            ? isScrolled
+              ? "bg-background border-border text-foreground shadow-sm" // home + scrolled
+              : "bg-transparent text-white border-transparent" // home + top
+            : isScrolled
+            ? "bg-background border-border text-foreground shadow-sm" // other + scrolled
+            : "bg-transparent text-foreground border-transparent" // other + top
+        )}
+      >
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          {/* 🌟 Logo */}
           <Link
             to="/"
             className="flex items-center gap-2 text-xl font-bold hover:opacity-90 transition-opacity"
+            onClick={closeMenu}
           >
             <span className="text-primary">✧</span>
             <span>Broome Service Solutions</span>
           </Link>
 
-          {/* Desktop Menu */}
+          {/* 💻 Desktop Menu */}
           <div className="hidden md:flex items-center gap-6">
-            <Link
-              to="/about"
-              className="nav-link font-medium hover:text-primary transition-colors"
-            >
-              About
-            </Link>
+            {menuItems.map(({ label, to }) => (
+              <Link key={to} to={to} className={navLink}>
+                {label}
+              </Link>
+            ))}
 
-            <Link
-              to="/services"
-              className="nav-link font-medium hover:text-primary transition-colors"
-            >
-              Services
-            </Link>
-
-            <Link
-              to="/contact"
-              className="nav-link font-medium hover:text-primary transition-colors"
-            >
-              Contact
-            </Link>
-            
-            {/* Dropdown Menu */}
+            {/* Membership Dropdown */}
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="font-medium">
+                  <NavigationMenuTrigger
+                    className={cn(
+                      "font-medium !p-0 !h-fit !bg-transparent !pb-1.5 text-sm",
+                      isHomePage
+                        ? isScrolled
+                          ? "text-secondary hover:text-primary"
+                          : "text-white hover:text-accent"
+                        : "!text-primary"
+                    )}
+                  >
                     Memberships
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="grid gap-3 p-4 w-60">
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to="/memberships"
-                          onClick={closeMenu}
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
-                          <div className="text-sm font-medium">
-                            BSS Memberships
-                          </div>
-                          <p className="line-clamp-2 text-sm leading-snug">
-                            Weekly and bi-weekly cleaning plans with exclusive perks
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to="/airbnb-subscriptions"
-                          onClick={closeMenu}
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
-                          <div className="text-sm font-medium">Airbnb Packages</div>
-                          <p className="line-clamp-2 text-sm leading-snug">
-                            Specialized turnover cleaning subscriptions for hosts
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
+                      {[
+                        {
+                          title: "BSS Memberships",
+                          desc: "Weekly and bi-weekly cleaning plans with exclusive perks",
+                          link: "/memberships",
+                        },
+                        {
+                          title: "Airbnb Packages",
+                          desc: "Specialized turnover cleaning subscriptions for hosts",
+                          link: "/airbnb-subscriptions",
+                        },
+                      ].map((item) => (
+                        <NavigationMenuLink asChild key={item.link}>
+                          <Link
+                            to={item.link}
+                            onClick={closeMenu}
+                            className="block select-none space-y-1 rounded-md p-3 leading-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium">
+                              {item.title}
+                            </div>
+                            <p className="line-clamp-2 text-sm leading-snug">
+                              {item.desc}
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      ))}
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -101,30 +131,32 @@ const Navbar = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* 📱 Mobile Menu Toggle */}
           <button
             aria-expanded={open}
             aria-label="Toggle menu"
+            aria-controls="mobile-menu"
+            onClick={toggleMenu}
             className="md:hidden p-2 rounded-md hover:bg-muted transition-colors"
-            onClick={() => setOpen(!open)}
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
-        {/* Mobile Dropdown */}
+        {/* 📱 Mobile Dropdown */}
         <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
-            open ? "max-h-[500px] pt-4 pb-6" : "max-h-0"
-          }`}
+          id="mobile-menu"
+          className={cn(
+            "md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out",
+            open ? "max-h-[400px] opacity-100 py-4" : "max-h-0 opacity-0"
+          )}
         >
-          <div className="flex flex-col space-y-5 text-lg font-medium">
-            <Link to="/about" onClick={closeMenu} className="nav-link">
-              About
-            </Link>
-            <Link to="/services" onClick={closeMenu} className="nav-link">
-              Services
-            </Link>
+          <div className="flex flex-col space-y-5 text-lg font-medium px-4">
+            {menuItems.map(({ label, to }) => (
+              <Link key={to} to={to} onClick={closeMenu} className="nav-link">
+                {label}
+              </Link>
+            ))}
             <Link to="/memberships" onClick={closeMenu} className="nav-link">
               BSS Memberships
             </Link>
@@ -135,23 +167,19 @@ const Navbar = () => {
             >
               Airbnb Packages
             </Link>
-            <Link to="/contact" onClick={closeMenu} className="nav-link">
-              Contact
-            </Link>
+            <Button
+              asChild
+              className="mt-4 w-full bg-accent hover:bg-accent/90 text-white"
+            >
+              <Link to="/get-quote" onClick={closeMenu}>
+                Get Quote
+              </Link>
+            </Button>
           </div>
-
-          <Button
-            asChild
-            className="mt-6 w-full bg-accent hover:bg-accent/90 text-white"
-          >
-            <Link to="/get-quote" onClick={closeMenu}>
-              Get Quote
-            </Link>
-          </Button>
         </div>
-      </div>
-    </nav>
-  )
-}
+      </nav>
+    </>
+  );
+};
 
-export default Navbar
+export default Navbar;

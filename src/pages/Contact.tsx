@@ -38,7 +38,7 @@ const Contact = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative py-16 overflow-hidden bg-section-light">
+      <section className="relative py-24 overflow-hidden bg-section-light">
         <BlobBackground/>
         <div className="container relative mx-auto px-4 text-center flex flex-col items-center justify-center gap-3">
           <div className="rounded-full bg-blue-500/20 px-6 py-2.5 text-sm font-semibold text-blue-500">
