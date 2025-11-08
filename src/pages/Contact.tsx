@@ -43,7 +43,7 @@ const Contact = () => {
     } else {
       toast.success("Message sent! We'll get back to you within 24 hours.")
     }
-    setFormData({ fullName: "", email: "", phone: "", message: "" });
+    // setFormData({ fullName: "", email: "", phone: "", message: "" });
   };
 
   return (
