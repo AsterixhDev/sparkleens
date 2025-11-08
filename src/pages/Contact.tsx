@@ -33,7 +33,7 @@ const Contact = () => {
     const sentMail = await import("@/lib/sendMail").then((mod) =>
       mod.sendMail({
         subject: `New Contact Message from ${formData.fullName}`,
-        text: message,
+        html: message,
         mailTo: formData.email,
       })
     );

@@ -1,25 +1,21 @@
-export async function sendMail({ subject, text, mailTo }: { subject: string; text: string; mailTo: string }) {
+export async function sendMail({ subject, html, mailTo }: { subject: string; html: string; mailTo: string }) {
   try {
-    const nodemailer = await import('nodemailer')
-    const transporter = nodemailer.createTransport({
-      host: import.meta.env.VITE_SMTP_HOST,
-      port: Number(import.meta.env.VITE_SMTP_PORT || 587),
-      secure: import.meta.env.VITE_SMTP_SECURE === 'true',
-      auth: import.meta.env.VITE_SMTP_USER
-        ? { user: import.meta.env.VITE_SMTP_USER, pass: import.meta.env.VITE_SMTP_PASS }
-        : undefined,
-    })
+    const res = await fetch('/api/sendMail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ subject, html, mailTo })
+    });
 
-    await transporter.sendMail({
-      from: import.meta.env.VITE_FROM_EMAIL || 'broomeservicesolutions@gmail.com',
-      to: mailTo,
-      subject,
-      text,
-    })
+    if (!res.ok) {
+      const data = await res.json().catch(() => null);
+      return { ok: false, error: data?.error || 'Failed to send email' };
+    }
 
-    return { ok: true }
+    return { ok: true };
   } catch (err) {
-    console.error('Error sending mail:', err)
-    return { ok: false, error: String(err) }
+    console.error('Error sending mail via API:', err);
+    return { ok: false, error: String(err) };
   }
 }

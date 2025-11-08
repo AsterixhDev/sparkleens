@@ -47,7 +47,7 @@ const GetQuote = () => {
     const sendMessage = await import("@/lib/sendMail").then((mod) =>
       mod.sendMail({
         subject: `New Quote Request from ${formData.name}`,
-        text: message,
+        html: message,
         mailTo: formData.email,
       })
     );
