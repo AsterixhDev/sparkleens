@@ -27,7 +27,7 @@ const Hero = () => {
       "
       style={{
         backgroundImage:
-          'linear-gradient(180deg, rgba(0,0,0,0.75) 10%, rgba(0,0,0,0.8) 90%), url("/hero-bg.webp")',
+          'linear-gradient(180deg, rgba(0,0,0,0.75) 10%, rgba(0,0,0,0.8) 90%), url("/images/hero/hero-bg.jpg")',
       }}
     >
       {/* 🌊 Dynamic wave at bottom */}

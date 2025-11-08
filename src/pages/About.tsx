@@ -151,9 +151,9 @@ const About = () => {
                 className="w-full max-w-lg mx-auto"
               >
                 <GroupImageFill
-                  src1={"/hero-1.webp"}
-                  src2={"/service-image-airbnb.webp"}
-                  src3={"/service-image-4.webp"}
+                  src1={"/images/hero/hero-bg.avif"}
+                  src2={"/images/services/service-image-estate.jpg"}
+                  src3={"/images/services/service-image-construction.webp"}
                   aspect={4 / 3}
                 />
               </motion.div>

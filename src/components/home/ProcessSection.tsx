@@ -111,7 +111,8 @@ const ProcessSection = ({ hasHeadline = true }: { hasHeadline?: boolean }) => {
               <span className="text-primary">Stress-Free.</span>
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-              You get transparent steps and fast results you understand and control.
+              You get transparent steps and fast results you understand and
+              control.
             </p>
           </motion.div>
         )}
@@ -124,13 +125,14 @@ const ProcessSection = ({ hasHeadline = true }: { hasHeadline?: boolean }) => {
             variants={imageVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.6 }} // triggers earlier
+            transition={{ duration: 0.7, ease: [0.42, 0, 0.58, 1] }} // smooth and faster
           >
             <div className="relative rounded-3xl overflow-hidden h-fit drop-shadow-md drop-shadow-primary/20">
               <GroupImageFill
-                src1="/hero-1.jpg"
-                src2="/process-2.jpg"
-                src3="/process-3.jpg"
+                src1="/images/process/process-1.jpg"
+                src2="/images/process/process-2.jpg"
+                src3="/images/process/process-3.jpg"
                 flipHorizontal
                 wrapperProps={{
                   className: "w-full h-auto rounded-3xl overflow-hidden",
@@ -145,7 +147,8 @@ const ProcessSection = ({ hasHeadline = true }: { hasHeadline?: boolean }) => {
             variants={stepContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }} // triggers later for staggered timing
+            transition={{ delayChildren: 0.3, staggerChildren: 0.15 }} // appear after image
           >
             {/* Vertical connector line */}
             <div className="absolute left-[27px] top-[48px] w-0.5 h-[calc(100%-72px)] bg-gradient-to-b from-primary/40 to-accent/40 z-0" />

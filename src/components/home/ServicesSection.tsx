@@ -19,42 +19,37 @@ const ServicesSection = ({ hasHeadline = true }: ServicesSectionProps) => {
   const services = [
     {
       title: "Airbnb Turnover Cleaning",
-      description: "5-star resets for short-term rentals.",
-      image: "/service-image-airbnb.webp",
+      description:
+        "Fast, reliable resets that keep short-term rentals spotless and guest-ready every time.",
+      image: "/images/services/service-image-airbnb.webp",
       quoteType: "airbnb",
     },
     {
-      title: "Move-In Cleaning",
+      title: "Move-In / Move-Out Cleaning",
       description:
-        "Thorough cleaning to make your new home spotless, sanitized, and move-in ready.",
-      image: "/service-image-3.jpg",
-      quoteType: "move-in",
-    },
-    {
-      title: "Move-Out Cleaning",
-      description:
-        "Deep cleaning to leave your old space shining for the next resident or inspection.",
-      image: "/service-image-4.webp",
-      quoteType: "move-out",
+        "Full deep cleaning to refresh spaces completely before moving in or out.",
+      image: "/images/services/service-image-inout.webp",
+      quoteType: "move-in-out",
     },
     {
       title: "Post-Construction & Renovation Cleaning",
       description:
-        "Remove dust, debris, and residue for a final polish after renovation or building work.",
-      image: "/service-image-construction.webp",
+        "Detailed removal of dust and debris to leave new builds polished and clean.",
+      image: "/images/services/service-image-construction.webp",
       quoteType: "construction",
     },
     {
       title: "Estate Cleanouts",
       description:
-        "Compassionate, complete property cleanouts handled with care and respect.",
-      image: "/service-image-estate.webp",
+        "Respectful and complete home cleanouts handled with care, privacy, and attention to detail.",
+      image: "/images/services/service-image-estate.jpg",
       quoteType: "estate",
     },
     {
       title: "Small Office Cleaning",
-      description: "Reliable, recurring office maintenance for busy workspaces.",
-      image: "/service-image-2.webp",
+      description:
+        "Consistent, professional maintenance that keeps offices organized, hygienic, and presentable daily.",
+      image: "/images/services/service-image-office.avif",
       quoteType: "office",
     },
   ];
@@ -131,7 +126,10 @@ const ServicesSection = ({ hasHeadline = true }: ServicesSectionProps) => {
 
                 {/* Footer */}
                 <CardFooter className="p-6 pt-0">
-                  <Link to={`/get-quote?type=${service.quoteType}`} className="w-full">
+                  <Link
+                    to={`/get-quote?type=${service.quoteType}`}
+                    className="w-full"
+                  >
                     <Button
                       variant="outline"
                       className="w-full border-2 border-primary text-primary font-medium

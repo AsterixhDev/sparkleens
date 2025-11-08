@@ -22,9 +22,10 @@ import {
 } from "lucide-react";
 import Layout from "@/components/Layout";
 import { useToast } from "@/hooks/use-toast";
+import { formatQuoteMessage } from "@/lib/formatMail/getquote";
+import { toast } from "sonner";
 
 const GetQuote = () => {
-  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -39,14 +40,22 @@ const GetQuote = () => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Simple UX placeholder; real submission can be wired to an API later
-    toast({
-      title: "Quote Request Submitted",
-      description:
-        "Thanks — we will provide a customized quote within 24 hours.",
-    });
+    const message = formatQuoteMessage(formData);
+    const sendMessage = await import("@/lib/sendMail").then((mod) =>
+      mod.sendMail({
+        subject: `New Quote Request from ${formData.name}`,
+        text: message,
+        mailTo: formData.email,
+      })
+    );
+    if (!sendMessage.ok) {
+      toast.error("There was an issue sending your quote request. Please try again later.");
+    } else {
+      toast.success("Quote request sent! We'll get back to you within 24 hours.");
+    }
     setFormData({
       name: "",
       phone: "",
