@@ -2,20 +2,11 @@ import React, { useEffect } from "react";
 import Layout from "@/components/Layout";
 import BlobBackground from "@/components/ui/blob-background";
 import ServicesSection from "@/components/home/ServicesSection";
+import setMeta from "@/lib/setMeta";
 
 const Services = () => {
   useEffect(() => {
     // ✅ SEO setup
-    const setMeta = (name: string, content: string) => {
-      let el = document.querySelector(`meta[name="${name}"]`);
-      if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute("name", name);
-        document.head.appendChild(el);
-      }
-      el.setAttribute("content", content);
-    };
-
     setMeta(
       "description",
       "Professional cleaning for Airbnb hosts, homeowners, and contractors. From turnovers to estate cleanouts, BSS handles it all."

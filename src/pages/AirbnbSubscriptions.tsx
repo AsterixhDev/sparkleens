@@ -1,38 +1,29 @@
-import React, { useEffect } from "react"
-import { Button } from "@/components/ui/button"
+import React, { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Check } from "lucide-react"
-import Layout from "@/components/Layout"
-import BlobBackground from "@/components/ui/blob-background"
-import { motion, Variants } from "framer-motion"
+} from "@/components/ui/card";
+import { Check } from "lucide-react";
+import Layout from "@/components/Layout";
+import BlobBackground from "@/components/ui/blob-background";
+import { motion, Variants } from "framer-motion";
+import setMeta from "@/lib/setMeta";
 
 const AirbnbSubscriptions = () => {
   useEffect(() => {
-    const setMeta = (name: string, content: string) => {
-      let el = document.querySelector(`meta[name="${name}"]`)
-      if (!el) {
-        el = document.createElement("meta")
-        el.setAttribute("name", name)
-        document.head.appendChild(el)
-      }
-      el.setAttribute("content", content)
-    }
-
     setMeta(
       "description",
       "Airbnb turnover subscriptions by Broome Service Solutions - fast, consistent, and 5-star ready. Ideal for busy hosts in Metro Atlanta."
-    )
+    );
     setMeta(
       "keywords",
       "Airbnb cleaning Atlanta, Airbnb turnover service, short-term rental cleaners GA, vacation rental cleaning service"
-    )
-  }, [])
+    );
+  }, []);
 
   const packages = [
     {
@@ -68,7 +59,7 @@ const AirbnbSubscriptions = () => {
       ],
       highlight: false,
     },
-  ]
+  ];
 
   // ✅ Safe typed Framer Motion variants
   const fadeUp: Variants = {
@@ -78,7 +69,7 @@ const AirbnbSubscriptions = () => {
       y: 0,
       transition: { duration: 0.6, ease: "easeOut" },
     },
-  }
+  };
 
   const containerVariants: Variants = {
     hidden: {},
@@ -88,7 +79,7 @@ const AirbnbSubscriptions = () => {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   return (
     <Layout>
@@ -210,7 +201,7 @@ const AirbnbSubscriptions = () => {
         </section>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default AirbnbSubscriptions
+export default AirbnbSubscriptions;

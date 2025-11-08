@@ -6,20 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import ProcessSection from "@/components/home/ProcessSection";
 import BlobBackground from "@/components/ui/blob-background";
+import setMeta from "@/lib/setMeta";
 
 const About = () => {
   useEffect(() => {
     document.title = "About Us | Broome Service Solutions";
 
-    const setMeta = (name: string, content: string) => {
-      let el = document.querySelector(`meta[name="${name}"]`);
-      if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute("name", name);
-        document.head.appendChild(el);
-      }
-      el.setAttribute("content", content);
-    };
 
     setMeta(
       "description",

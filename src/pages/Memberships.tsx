@@ -11,6 +11,7 @@ import {
 import { Check } from "lucide-react";
 import Layout from "@/components/Layout";
 import BlobBackground from "@/components/ui/blob-background";
+import setMeta from "@/lib/setMeta";
 
 // ✅ Define smooth framer variants with correct types
 const fadeUp: Variants = {
@@ -34,16 +35,6 @@ const staggerContainer: Variants = {
 
 const Memberships = () => {
   useEffect(() => {
-    const setMeta = (name: string, content: string) => {
-      let el = document.querySelector(`meta[name="${name}"]`);
-      if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute("name", name);
-        document.head.appendChild(el);
-      }
-      el.setAttribute("content", content);
-    };
-
     setMeta(
       "description",
       "Save more with Broome Service Solutions memberships. Choose weekly, bi-weekly, or custom cleaning plans and enjoy exclusive discounts."

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { motion, Variants } from "framer-motion";
 import GroupImageFill from "../ui/GroupImageFill";
+import setMeta from "@/lib/setMeta";
 
 const ProcessSection = ({ hasHeadline = true }: { hasHeadline?: boolean }) => {
   const steps = [
@@ -27,15 +28,6 @@ const ProcessSection = ({ hasHeadline = true }: { hasHeadline?: boolean }) => {
   ];
 
   useEffect(() => {
-    const setMeta = (name: string, content: string) => {
-      let el = document.querySelector(`meta[name="${name}"]`);
-      if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute("name", name);
-        document.head.appendChild(el);
-      }
-      el.setAttribute("content", content);
-    };
 
     setMeta(
       "description",
