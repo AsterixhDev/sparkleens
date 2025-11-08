@@ -3,13 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Phone, Mail, Clock } from "lucide-react";
+import { Phone, Mail, Clock, HourglassIcon } from "lucide-react";
 import Layout from "@/components/Layout";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import BlobBackground from "@/components/ui/blob-background";
 import { formatContactMessage } from "@/lib/formatMail/contact";
 import { toast } from "sonner";
+import { toastClassnames } from "@/lib/toastClassnames";
 
 const Contact = () => {
   const navigate = useNavigate();
@@ -21,29 +22,51 @@ const Contact = () => {
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Lightweight UX: show toast and reset form. Real submission can be wired later.
+    setLoading(true);
+    setSuccess(false);
 
-    const message = formatContactMessage(formData);
-    const sentMail = await import("@/lib/sendMail").then((mod) =>
-      mod.sendMail({
-        subject: `New Contact Message from ${formData.fullName}`,
-        html: message,
-        mailTo: formData.email,
-      })
-    );
+    try {
+      const message = formatContactMessage(formData);
+      const sentMail = await import("@/lib/sendMail").then((mod) =>
+        mod.sendMail({
+          subject: `New Contact Message from ${formData.fullName}`,
+          html: message,
+          mailTo: formData.email,
+        })
+      );
 
-    if (!sentMail.ok) {
-      toast.error("There was an issue sending your message. Please try again later.")
-    } else {
-      toast.success("Message sent! We'll get back to you within 24 hours.")
+      if (!sentMail.ok) {
+        toast.error(
+          "There was an issue sending your message. Please try again later.",
+          { classNames: toastClassnames }
+        );
+      } else {
+        toast.success("Message sent! We'll get back to you within 24 hours.", {
+          classNames: toastClassnames,
+        });
+        setSuccess(true);
+      }
+    } catch {
+      toast.error("There was an unexpected error. Please try again later.", {
+        classNames: toastClassnames,
+      });
+    } finally {
+      setLoading(false);
+      setFormData({ fullName: "", email: "", phone: "", message: "" });
+
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
     }
-    // setFormData({ fullName: "", email: "", phone: "", message: "" });
   };
 
   return (
@@ -177,9 +200,23 @@ const Contact = () => {
                 <div className="flex gap-3">
                   <Button
                     type="submit"
-                    className="bg-primary hover:bg-primary-hover text-primary-foreground rounded-full"
+                    disabled={loading || success}
+                    className={`rounded-full w-full md:w-auto flex items-center justify-center gap-2 ${
+                      loading
+                        ? "bg-primary/70 cursor-wait"
+                        : success
+                        ? "bg-green-600 hover:bg-green-700 text-white"
+                        : "bg-primary hover:bg-primary-hover text-primary-foreground"
+                    }`}
                   >
-                    Send Message
+                    {loading && (
+                      <HourglassIcon className="w-5 h-5 animate-spin" />
+                    )}
+                    {success
+                      ? "Sent!"
+                      : loading
+                      ? "Sending..."
+                      : "Send Message"}
                   </Button>
                   <Button
                     type="button"

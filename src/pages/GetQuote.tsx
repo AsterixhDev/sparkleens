@@ -24,6 +24,7 @@ import Layout from "@/components/Layout";
 import { useToast } from "@/hooks/use-toast";
 import { formatQuoteMessage } from "@/lib/formatMail/getquote";
 import { toast } from "sonner";
+import { toastClassnames } from "@/lib/toastClassnames";
 
 const GetQuote = () => {
   const [formData, setFormData] = useState({
@@ -36,40 +37,64 @@ const GetQuote = () => {
     notes: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simple UX placeholder; real submission can be wired to an API later
-    const message = formatQuoteMessage(formData);
-    const sendMessage = await import("@/lib/sendMail").then((mod) =>
-      mod.sendMail({
-        subject: `New Quote Request from ${formData.name}`,
-        html: message,
-        mailTo: formData.email,
-      })
-    );
-    if (!sendMessage.ok) {
-      toast.error("There was an issue sending your quote request. Please try again later.");
-    } else {
-      toast.success("Quote request sent! We'll get back to you within 24 hours.");
+    setLoading(true);
+    setSuccess(false);
+
+    try {
+      const message = formatQuoteMessage(formData);
+      const sendMessage = await import("@/lib/sendMail").then((mod) =>
+        mod.sendMail({
+          subject: `New Quote Request from ${formData.name}`,
+          html: message,
+          mailTo: formData.email,
+        })
+      );
+
+      if (!sendMessage.ok) {
+        toast.error(
+          "There was an issue sending your quote request. Please try again later.",
+          { classNames: toastClassnames }
+        );
+      } else {
+        toast.success(
+          "Quote request sent! We'll get back to you within 24 hours.",
+          { classNames: toastClassnames }
+        );
+        setSuccess(true);
+      }
+    } catch {
+      toast.error("There was an unexpected error. Please try again later.", {
+        classNames: toastClassnames,
+      });
+    } finally {
+      setLoading(false);
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        propertyType: "",
+        size: "",
+        desiredDate: "",
+        notes: "",
+      });
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
     }
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      propertyType: "",
-      size: "",
-      desiredDate: "",
-      notes: "",
-    });
   };
 
   return (
     <Layout>
-            {/* Hero Section */}
+      {/* Hero Section */}
       <section className="relative bg-section-light py-24 overflow-hidden">
         <BlobBackground />
         <div className="container relative mx-auto px-4 text-center">
@@ -77,7 +102,8 @@ const GetQuote = () => {
             Get Your <span className="text-primary">Free Quote</span>
           </h1>
           <p className="text-lg max-w-2xl mx-auto">
-            Tell us about your cleaning needs and we'll provide a customized quote within 24 hours
+            Tell us about your cleaning needs and we'll provide a customized
+            quote within 24 hours
           </p>
         </div>
       </section>
@@ -187,9 +213,17 @@ const GetQuote = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-primary hover:bg-primary-hover text-primary-foreground rounded-full"
+                  className={`w-full rounded-full ${
+                    loading
+                      ? "bg-primary/70 cursor-wait"
+                      : success
+                      ? "bg-green-600 hover:bg-green-700 text-white"
+                      : "bg-primary hover:bg-primary-hover text-primary-foreground"
+                  } flex items-center justify-center gap-2`}
+                  disabled={loading || success}
                 >
-                  Request Quote
+                  {loading && <Hourglass className="w-5 h-5 animate-spin" />}
+                  {success ? "Sent!" : loading ? "Sending..." : "Request Quote"}
                 </Button>
               </form>
             </div>
@@ -198,16 +232,17 @@ const GetQuote = () => {
             <div className="space-y-6">
               <div className="p-6 rounded-2xl border bg-primary/20">
                 <h3 className="font-bold text-lg mb-3">
-                  Why choose <b className="text-primary">Broome Service Solutions</b>?
+                  Why choose{" "}
+                  <b className="text-primary">Broome Service Solutions</b>?
                 </h3>
                 <ul className="space-y-4 text-sm">
                   <li className="flex items-center gap-2">
-                    <BadgeDollarSign className="w-5 h-5 text-primary" />{" "}
-                    Free, no-obligation quote
+                    <BadgeDollarSign className="w-5 h-5 text-primary" /> Free,
+                    no-obligation quote
                   </li>
                   <li className="flex items-center gap-2">
-                    <Stars className="w-5 h-5 text-primary" />{" "}
-                    Experienced, vetted cleaners
+                    <Stars className="w-5 h-5 text-primary" /> Experienced,
+                    vetted cleaners
                   </li>
                   <li className="flex items-center gap-2">
                     <ClipboardCheck className="w-5 h-5 text-primary" />{" "}
