@@ -1,6 +1,6 @@
 export async function sendMail({ subject, html, mailTo }: { subject: string; html: string; mailTo: string }) {
   try {
-    const res = await fetch(import.meta.env.VITE_BASE_URL + '/api/sendMail', {
+    const res = await fetch(import.meta.env.VITE_BASE_URL + '/api/send-mail', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
