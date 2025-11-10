@@ -51,18 +51,25 @@ const Navbar = () => {
             : isScrolled
             ? "bg-background border-border text-foreground shadow-sm" // other + scrolled
             : "bg-transparent text-foreground border-transparent", // other + top
-            open && "!bg-background !border-border !text-foreground !shadow-sm"
+          open && "!bg-background !border-border !text-foreground !shadow-sm"
         )}
       >
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           {/* 🌟 Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 text-xl font-bold hover:opacity-90 transition-opacity"
+            className="flex flex-col leading-tight hover:opacity-90 transition-opacity"
             onClick={closeMenu}
           >
-            <span className="text-primary">✧</span>
-            <span>Broome Service Solutions</span>
+            <span className="text-[22px] font-extrabold tracking-tight text-[#0E4A6F]">
+              BROOME SERVICE
+            </span>
+
+            <span className="text-[18px] font-semibold tracking-[0.25em] text-[#37B29A] flex items-center gap-2">
+              <span className="w-6 h-[2px] bg-[#37B29A]"></span>
+              SOLUTIONS
+              <span className="w-6 h-[2px] bg-[#37B29A]"></span>
+            </span>
           </Link>
 
           {/* 💻 Desktop Menu */}
