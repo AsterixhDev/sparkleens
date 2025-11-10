@@ -63,23 +63,32 @@ const Navbar = () => {
           >
             <span
               className={cn(
-                "text-[22px] font-extrabold tracking-tight",
+                "text-[22px] text-center font-extrabold tracking-tight",
                 isHomePage
                   ? isScrolled
-                    ? "text-primary" // home + scrolled
-                    : "text-white" // home + top
-                  : "text-primary", // other + top
-                open &&
-                  "!text-primary"
+                    ? "text-primary"
+                    : "text-white"
+                  : "text-primary",
+                open && "!text-primary"
               )}
             >
               BROOME SERVICE
             </span>
 
-            <span className="text-[18px] font-semibold tracking-[0.25em] text-accent flex items-center gap-2">
-              <span className="w-6 h-[2px] bg-accent"></span>
+            <span
+              className={cn(
+                "text-[18px] font-semibold tracking-[0.25em] flex items-center justify-center gap-2",
+                isHomePage
+                  ? isScrolled
+                    ? "text-primary"
+                    : "text-accent"
+                  : "text-primary",
+                open && "!text-primary"
+              )}
+            >
+              <span className="h-[2px] bg-current flex-1"></span>
               SOLUTIONS
-              <span className="w-6 h-[2px] bg-accent"></span>
+              <span className="h-[2px] bg-current flex-1"></span>
             </span>
           </Link>
 
