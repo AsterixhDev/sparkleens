@@ -1,7 +1,4 @@
-import {
-  Mail,
-  Phone
-} from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
 
@@ -15,12 +12,37 @@ const Footer = () => {
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 text-2xl font-semibold mb-4 tracking-wide">
-              <span className="text-white/90">✧</span>
-              <span className="drop-shadow-sm">Broome Service Solutions</span>
-            </div>
+            <Link
+              to="/"
+              className="flex flex-col leading-tight hover:opacity-90 transition-opacity"
+              onClick={closeMenu}
+            >
+              <span
+                className={
+                  "text-[22px] text-center text-white font-extrabold tracking-tight"
+                }
+              >
+                BROOME SERVICE
+              </span>
+
+              <span
+                className={
+                  "text-[18px] font-semibold tracking-[0.25em] text-accent flex items-center justify-center gap-2"
+                }
+              >
+                <span className="h-[2px] bg-accent flex-1"></span>
+                SOLUTIONS
+                <span className="h-[2px] bg-accent flex-1"></span>
+              </span>
+            </Link>
+            <p className="text-sm sm:text-base leading-relaxed text-white/80 mb-2 max-w-md">
+              Serving Metro Atlanta and surrounding areas.
+            </p>
             <p className="text-sm sm:text-base leading-relaxed text-white/80 mb-6 max-w-md">
-              You get dependable cleaners, repeatable results, and visible hygiene improvement every visit. We stay consistent, hold accountability, and follow performance standards that protect your space, your health, and your peace of mind.
+              You get dependable cleaners, repeatable results, and visible
+              hygiene improvement every visit. We stay consistent, hold
+              accountability, and follow performance standards that protect your
+              space, your health, and your peace of mind.
             </p>
             <div className="flex gap-4">
               {socials.map(({ href, label }, i) => (
