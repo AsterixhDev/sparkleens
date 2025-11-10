@@ -125,34 +125,34 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
             className="
-    flex items-center justify-center
-    whitespace-nowrap
-    gap-2 text-xs sm:text-sm md:text-base text-gray-300 mt-2
-  "
+              flex flex-wrap items-center justify-center
+              gap-1 sm:gap-2 text-xs sm:text-sm md:text-base text-gray-300 mt-2
+            "
           >
-            <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
+            <CheckCircle className="w-4 h-4 text-accent" />
             <span>
               Join our{" "}
-              <span className="text-white font-semibold">BSS Membership</span>{" "}
+              <span className="text-white font-semibold">BSS Membership</span> —
               save up to <span className="text-accent font-semibold">20%</span>{" "}
               on recurring cleanings
             </span>
           </motion.div>
-          {/* LICENSED AND INSURED Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.1 }}
-            className="
+        </motion.div>
+
+        {/* LICENSED AND INSURED Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.1 }}
+          className="
     flex items-center justify-center
     gap-2 text-xs sm:text-sm md:text-base text-gray-200 mt-3
   "
-          >
-            <ShieldCheck className="w-4 h-4 text-accent" />
-            <span className="font-semibold text-white">
-              Licensed and Fully Insured
-            </span>
-          </motion.div>
+        >
+          <ShieldCheck className="w-4 h-4 text-accent" />
+          <span className="font-semibold text-white">
+            Licensed and Fully Insured
+          </span>
         </motion.div>
       </div>
     </section>
