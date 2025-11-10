@@ -12,11 +12,7 @@ const Footer = () => {
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12">
           <div className="md:col-span-2">
-            <Link
-              to="/"
-              className="flex flex-col leading-tight hover:opacity-90 transition-opacity"
-              onClick={closeMenu}
-            >
+            <div className="flex flex-col leading-tight hover:opacity-90 transition-opacity mb-4">
               <span
                 className={
                   "text-[22px] text-center text-white font-extrabold tracking-tight"
@@ -34,7 +30,7 @@ const Footer = () => {
                 SOLUTIONS
                 <span className="h-[2px] bg-accent flex-1"></span>
               </span>
-            </Link>
+            </div>
             <p className="text-sm sm:text-base leading-relaxed text-white/80 mb-2 max-w-md">
               Serving Metro Atlanta and surrounding areas.
             </p>
