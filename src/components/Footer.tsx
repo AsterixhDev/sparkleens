@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12">
           <div className="md:col-span-2">
-            <div className="flex flex-col leading-tight hover:opacity-90 transition-opacity mb-4">
+            <div className="w-fit flex flex-col leading-tight hover:opacity-90 transition-opacity mb-4">
               <span
                 className={
                   "text-[22px] text-center text-white font-extrabold tracking-tight"
