@@ -73,7 +73,7 @@ const ServicesSection = ({ hasHeadline = true }: ServicesSectionProps) => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 tracking-tight">
-              Our <span className="text-primary">Core Services</span>
+              Our <span className="text-primary">Services</span>
             </h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
               From move-ins to estate cleanouts, we tailor every cleaning

@@ -131,38 +131,28 @@ const Hero = () => {
           >
             <CheckCircle className="w-4 h-4 text-accent" />
             <span>
-              Join our <span className="text-white font-semibold">BSS Membership</span> — save up to{" "}
-              <span className="text-accent font-semibold">20%</span> on recurring cleanings
+              Join our{" "}
+              <span className="text-white font-semibold">BSS Membership</span> —
+              save up to <span className="text-accent font-semibold">20%</span>{" "}
+              on recurring cleanings
             </span>
           </motion.div>
         </motion.div>
 
-        {/* 🧩 Quick Highlights */}
+        {/* LICENSED AND INSURED Indicator */}
         <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.1 }}
           className="
-            mt-8 sm:mt-10 flex flex-wrap justify-center
-            gap-x-4 gap-y-2 sm:gap-x-6 sm:gap-y-3
-            text-gray-100 text-xs sm:text-sm md:text-base
-          "
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+    flex items-center justify-center
+    gap-2 text-xs sm:text-sm md:text-base text-gray-200 mt-3
+  "
         >
-          {[
-            "Airbnb Turnovers",
-            "Move-In / Move-Out",
-            "Post-Construction",
-            "Estate Cleanouts",
-            "Office Cleaning",
-          ].map((service, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-0"
-            >
-              <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent" />
-              <span>{service}</span>
-            </div>
-          ))}
+          <ShieldCheck className="w-4 h-4 text-accent" />
+          <span className="font-semibold text-white">
+            Licensed and Fully Insured
+          </span>
         </motion.div>
       </div>
     </section>
