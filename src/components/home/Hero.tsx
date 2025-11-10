@@ -104,19 +104,6 @@ const Hero = () => {
                 Get a Free Quote
               </Button>
             </Link>
-
-            <Link to="/services" className="w-full sm:w-auto">
-              <Button
-                size="lg"
-                variant="outline"
-                className="
-                  border-2 rounded-full px-8 sm:px-10
-                  bg-transparent hover:bg-white/10 w-full sm:w-auto
-                "
-              >
-                View Services
-              </Button>
-            </Link>
           </div>
 
           {/* ⚡️ Membership / Urgency Indicator */}
