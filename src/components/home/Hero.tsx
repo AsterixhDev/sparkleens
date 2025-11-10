@@ -70,8 +70,8 @@ const Hero = () => {
               px-2 sm:px-0
             "
           >
-            Cleaning & Turnover{" "}
-            <span className="text-accent">Services That Deliver</span>
+            Cleaning, Turnovers & Estate{" "}
+            <span className="text-accent">Solutions You Can Trust</span>
           </h1>
 
           {/* 💬 Supporting Text */}
