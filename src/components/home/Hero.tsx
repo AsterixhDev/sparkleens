@@ -81,8 +81,11 @@ const Hero = () => {
               max-w-md sm:max-w-xl md:max-w-2xl mx-auto
             "
           >
-            Expert cleaning for homes, offices, and rental spaces. Consistent
-            quality. Transparent pricing. Guaranteed satisfaction.
+            Expert cleaning for homes, offices, rentals, and commercial
+            environments. You get fast turnover results, clean move results,
+            renovation cleanup, estate cleanup, and professional office
+            cleaning. Consistent quality. Transparent pricing. Guaranteed
+            satisfaction.
           </p>
 
           {/* 🔘 CTAs */}

@@ -7,24 +7,20 @@ import { SocialIcon } from "react-social-icons";
 
 const Footer = () => {
   const socials = [
-    { href: "https://www.yelp.com", label: "Yelp" },
-    { href: "https://www.instagram.com", label: "Instagram" },
+    { href: "https://yelp.to/Ju4aTFVE-0", label: "Yelp" },
+    { href: "https://www.instagram.com/broomeservice", label: "Instagram" },
   ];
   return (
     <footer className="relative bg-primary text-white overflow-hidden">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12">
-          {/* Company Info */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 text-2xl font-semibold mb-4 tracking-wide">
               <span className="text-white/90">✧</span>
               <span className="drop-shadow-sm">Broome Service Solutions</span>
             </div>
             <p className="text-sm sm:text-base leading-relaxed text-white/80 mb-6 max-w-md">
-              Reliable cleaning for homes, offices, and commercial spaces. We
-              focus on consistency, accountability, and measurable hygiene. Our
-              cleaners follow strict checklists to deliver the same spotless
-              results—every single visit.
+              You get dependable cleaners, repeatable results, and visible hygiene improvement every visit. We stay consistent, hold accountability, and follow performance standards that protect your space, your health, and your peace of mind.
             </p>
             <div className="flex gap-4">
               {socials.map(({ href, label }, i) => (
@@ -46,7 +42,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h3 className="font-semibold text-lg mb-4 text-white/95">
               Quick Links
@@ -72,7 +67,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div>
             <h3 className="font-semibold text-lg mb-4 text-white/95">
               Contact Us
@@ -100,10 +94,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Divider Line */}
         <div className="mt-12 pt-8 border-t border-white/15" />
 
-        {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/70 mt-6">
           <p>
             © {new Date().getFullYear()}{" "}
@@ -130,7 +122,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Decorative blurred shapes */}
       <div className="absolute top-10 left-1/3 w-72 h-72 bg-accent/10 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-0 right-1/4 w-60 h-60 bg-white/10 rounded-full blur-3xl -z-10" />
     </footer>
