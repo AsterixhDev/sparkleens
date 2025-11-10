@@ -76,15 +76,9 @@ const Navbar = () => {
             </span>
 
             <span
-              className={cn(
-                "text-[18px] font-semibold tracking-[0.25em] flex items-center justify-center gap-2",
-                isHomePage
-                  ? isScrolled
-                    ? "text-primary"
-                    : "text-accent"
-                  : "text-primary",
-                open && "!text-primary"
-              )}
+              className={
+                "text-[18px] font-semibold tracking-[0.25em] accent flex items-center justify-center gap-2"
+              }
             >
               <span className="h-[2px] bg-current flex-1"></span>
               SOLUTIONS
