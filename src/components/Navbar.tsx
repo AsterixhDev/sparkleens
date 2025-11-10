@@ -61,14 +61,25 @@ const Navbar = () => {
             className="flex flex-col leading-tight hover:opacity-90 transition-opacity"
             onClick={closeMenu}
           >
-            <span className="text-[22px] font-extrabold tracking-tight text-[#0E4A6F]">
+            <span
+              className={cn(
+                "text-[22px] font-extrabold tracking-tight",
+                isHomePage
+                  ? isScrolled
+                    ? "text-primary" // home + scrolled
+                    : "text-white" // home + top
+                  : "text-primary", // other + top
+                open &&
+                  "!text-primary"
+              )}
+            >
               BROOME SERVICE
             </span>
 
-            <span className="text-[18px] font-semibold tracking-[0.25em] text-[#37B29A] flex items-center gap-2">
-              <span className="w-6 h-[2px] bg-[#37B29A]"></span>
+            <span className="text-[18px] font-semibold tracking-[0.25em] text-accent flex items-center gap-2">
+              <span className="w-6 h-[2px] bg-accent"></span>
               SOLUTIONS
-              <span className="w-6 h-[2px] bg-[#37B29A]"></span>
+              <span className="w-6 h-[2px] bg-accent"></span>
             </span>
           </Link>
 
