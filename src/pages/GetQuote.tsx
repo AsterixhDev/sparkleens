@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import Layout from "@/components/Layout";
 import BlobBackground from "@/components/ui/blob-background";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -12,21 +10,30 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useQueryParams } from "@/hooks/useQueryParams";
+import { formatQuoteMessage } from "@/lib/formatMail/getquote";
+import { toastClassnames } from "@/lib/toastClassnames";
 import {
   BadgeDollarSign,
-  Stars,
   ClipboardCheck,
   Clock,
-  Phone,
   Hourglass,
+  Phone,
+  Stars,
 } from "lucide-react";
-import Layout from "@/components/Layout";
-import { useToast } from "@/hooks/use-toast";
-import { formatQuoteMessage } from "@/lib/formatMail/getquote";
+import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
-import { toastClassnames } from "@/lib/toastClassnames";
 
 const GetQuote = () => {
+  const queries = useQueryParams<{property:(string|number)[]}>({
+    property(value) {
+      if (!value) return [];
+      return value.split(",").map((v) => isNaN(Number(v)) ? v : Number(v) );
+    },
+  })
+  console.log(queries)
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -36,6 +43,8 @@ const GetQuote = () => {
     desiredDate: "",
     notes: "",
   });
+
+ 
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
