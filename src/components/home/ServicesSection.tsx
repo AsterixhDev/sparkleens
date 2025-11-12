@@ -127,7 +127,7 @@ const ServicesSection = ({ hasHeadline = true }: ServicesSectionProps) => {
                 {/* Footer */}
                 <CardFooter className="p-6 pt-0">
                   <Link
-                    to={`/get-quote?type=${service.quoteType}`}
+                    to={`/get-quote?property=${service.quoteType}`}
                     className="w-full"
                   >
                     <Button

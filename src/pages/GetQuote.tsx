@@ -27,18 +27,17 @@ import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 
 const GetQuote = () => {
-  const queries = useQueryParams<{property:(string|number)[]}>({
+  const {property} = useQueryParams<{property:string}>({
     property(value) {
-      if (!value) return [];
-      return value.split(",").map((v) => isNaN(Number(v)) ? v : Number(v) );
+      if (!value) return "";
+      return decodeURIComponent(value);
     },
   })
-  console.log(queries)
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
-    propertyType: "",
+    propertyType: property || "",
     size: "",
     desiredDate: "",
     notes: "",
@@ -174,13 +173,13 @@ const GetQuote = () => {
                       <SelectValue placeholder="Select property type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Residential">Residential</SelectItem>
-                      <SelectItem value="Airbnb">Airbnb</SelectItem>
-                      <SelectItem value="Commercial">Commercial</SelectItem>
-                      <SelectItem value="Post-Construction">
+                      <SelectItem value="airbnb">Airbnb</SelectItem>
+                      <SelectItem value="move-in-out">Move in / Move out</SelectItem>
+                      <SelectItem value="construction">
                         Post-Construction
                       </SelectItem>
-                      <SelectItem value="Estate">Estate</SelectItem>
+                      <SelectItem value="estate">Estate</SelectItem>
+                      <SelectItem value="office">Office</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
