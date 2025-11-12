@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="w-fit flex flex-col leading-tight hover:opacity-90 transition-opacity mb-4">
               <span
                 className={
-                  "text-[22px] text-center text-white font-extrabold tracking-tight"
+                  "text-sm sm:text-base text-center text-white font-extrabold tracking-tight"
                 }
               >
                 BROOME SERVICE
@@ -23,7 +23,7 @@ const Footer = () => {
 
               <span
                 className={
-                  "text-[18px] font-semibold tracking-[0.25em] text-accent flex items-center justify-center gap-2"
+                  "text-xs sm:text-sm font-semibold tracking-[0.25em] text-accent flex items-center justify-center gap-2"
                 }
               >
                 <span className="h-[2px] bg-accent flex-1"></span>

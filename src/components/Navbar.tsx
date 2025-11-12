@@ -63,7 +63,7 @@ const Navbar = () => {
           >
             <span
               className={cn(
-                "text-lg text-center font-extrabold tracking-tight",
+                "text-sm sm:text-base text-center font-extrabold tracking-tight",
                 isHomePage
                   ? isScrolled
                     ? "text-primary"
@@ -77,7 +77,7 @@ const Navbar = () => {
 
             <span
               className={
-                "text-sm font-semibold tracking-[0.25em] text-accent flex items-center justify-center gap-2"
+                "text-xs sm:text-sm font-semibold tracking-[0.25em] text-accent flex items-center justify-center gap-2"
               }
             >
               <span className="h-[2px] bg-current flex-1"></span>
