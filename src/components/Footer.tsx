@@ -69,6 +69,9 @@ const Footer = () => {
                 { label: "Home", to: "/" },
                 { label: "About", to: "/about" },
                 { label: "Services", to: "/services" },
+                { label: "Contact", to: "/contact" },
+                { label: "BSS Membership", to: "/memberships" },
+                { label: "Airbnb Subscription", to: "/airbnb-subscriptions" },
               ].map((link, i) => (
                 <li key={i}>
                   <Link
@@ -122,7 +125,7 @@ const Footer = () => {
             </span>
             . All Rights Reserved.
           </p>
-          <div className="flex gap-4">
+          {/* <div className="flex gap-4">
             <Link
               to="/privacy"
               className="hover:text-white transition-colors duration-300"
@@ -136,7 +139,7 @@ const Footer = () => {
             >
               Terms of Service
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
 
