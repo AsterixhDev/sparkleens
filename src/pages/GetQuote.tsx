@@ -26,13 +26,29 @@ import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 
+// allowed property types
+const ALLOWED_PROPERTIES = [
+  "airbnb",
+  "move-in-out",
+  "construction",
+  "estate",
+  "office",
+] as const;
+
+type PropertyType = (typeof ALLOWED_PROPERTIES)[number];
+
+function parseProperty(value: string | null): PropertyType | "" {
+  if (!value) return "";
+  const decoded = decodeURIComponent(value);
+  return (ALLOWED_PROPERTIES as readonly string[]).includes(decoded)
+    ? (decoded as PropertyType)
+    : "";
+}
+
 const GetQuote = () => {
-  const {property} = useQueryParams<{property:string}>({
-    property(value) {
-      if (!value) return "";
-      return decodeURIComponent(value);
-    },
-  })
+  const { property } = useQueryParams<{ property: PropertyType | "" }>({
+    property: parseProperty,
+  });
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -42,8 +58,6 @@ const GetQuote = () => {
     desiredDate: "",
     notes: "",
   });
-
- 
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -174,7 +188,9 @@ const GetQuote = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="airbnb">Airbnb</SelectItem>
-                      <SelectItem value="move-in-out">Move in / Move out</SelectItem>
+                      <SelectItem value="move-in-out">
+                        Move in / Move out
+                      </SelectItem>
                       <SelectItem value="construction">
                         Post-Construction
                       </SelectItem>
