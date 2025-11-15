@@ -137,17 +137,14 @@ const Memberships = () => {
             {membershipTiers.map((tier, index) => (
               <motion.div key={index} variants={fadeUp} className={
                 cn(
-                  "size-full",
-                  {
-                    "md:scale-50":!tier.highlight
-                  }
+                  "size-full flex flex-col items-center justify-center",
                 )
               }>
                 <Card
                   className={`flex h-full flex-col ${
                     tier.highlight
                       ? "border-primary shadow-lg"
-                      : ""
+                      : "md:scale-50"
                   }`}
                 >
                   <CardHeader className="text-center">
