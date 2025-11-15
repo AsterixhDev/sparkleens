@@ -178,16 +178,21 @@ const Memberships = () => {
             variants={fadeUp}
           >
             <h3 className="text-2xl font-bold mb-2 relative">
-              Start saving on every clean
-            </h3>
+              {" "}
+              Start saving on every clean{" "}
+            </h3>{" "}
             <p className="text-muted-foreground mb-6 relative">
-              Join now and let us take care of your cleaning needs all year
-              round.
-            </p>
-            <Button size="lg" className="rounded-full relative">
-              Join Now
-            </Button>
-
+              {" "}
+              Join the Gold Membership for four cleanings each month and a light
+              deep clean on every fourth visit. You get consistent results and
+              strong monthly value.{" "}
+            </p>{" "}
+            <Link to="https://book.squareup.com/appointments/kc9k92jp0fullx/location/L8ED2XJBBMFV0/services/JVS3IG3ZY5NNZ5T676NOD67F">
+              <Button size="lg" className="rounded-full relative">
+                {" "}
+                Join Gold Membership{" "}
+              </Button>
+            </Link>
             <svg
               className="absolute -z-10 left-0 bottom-0 w-full h-28 pointer-events-none"
               viewBox="0 0 900 600"
