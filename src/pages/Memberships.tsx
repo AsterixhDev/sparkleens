@@ -13,6 +13,8 @@ import { Check } from "lucide-react";
 import Layout from "@/components/Layout";
 import BlobBackground from "@/components/ui/blob-background";
 import setMeta from "@/lib/setMeta";
+import { cn } from "@/lib/utils";
+
 
 // ✅ Define smooth framer variants with correct types
 const fadeUp: Variants = {
@@ -133,11 +135,18 @@ const Memberships = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {membershipTiers.map((tier, index) => (
-              <motion.div key={index} variants={fadeUp}>
+              <motion.div key={index} variants={fadeUp} className={
+                cn(
+                  "size-full",
+                  {
+                    "md:scale-75":!tier.highlight
+                  }
+                )
+              }>
                 <Card
-                  className={`flex flex-col ${
+                  className={`flex h-full flex-col ${
                     tier.highlight
-                      ? "border-primary shadow-lg md:scale-105"
+                      ? "border-primary shadow-lg"
                       : ""
                   }`}
                 >
