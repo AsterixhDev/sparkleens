@@ -139,7 +139,7 @@ const Memberships = () => {
                 cn(
                   "size-full",
                   {
-                    "md:scale-75":!tier.highlight
+                    "md:scale-50":!tier.highlight
                   }
                 )
               }>
