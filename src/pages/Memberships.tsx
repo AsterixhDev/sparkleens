@@ -15,7 +15,6 @@ import BlobBackground from "@/components/ui/blob-background";
 import setMeta from "@/lib/setMeta";
 import { cn } from "@/lib/utils";
 
-
 // ✅ Define smooth framer variants with correct types
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -51,15 +50,14 @@ const Memberships = () => {
   const membershipTiers = [
     {
       title: "Silver Membership",
-      description:
-        "Entry-level plan for light upkeep and maintenance. Works for smaller homes, apartments, or office spaces. Includes two general cleanings each month covering kitchens, bathrooms, floors, and high-touch areas.",
+      description: "Light upkeep for small spaces. Two cleanings each month.",
       features: [
-        "Two cleanings each month",
-        "Covers kitchens, bathrooms, floors, high-touch areas",
-        "Starting at 160 dollars per month for up to two bedrooms",
-        "Month to month, cancel with seven days notice",
-        "Options include 1 to 2 bedroom at 160 dollars for two hours",
-        "Option for 3 bedrooms at 200 dollars for two hours thirty minutes",
+        "Two monthly cleanings",
+        "Kitchen, bathroom, floors, high touch areas",
+        "From 160 dollars for up to two bedrooms",
+        "Month to month, seven day notice",
+        "1 to 2 bedrooms, 160 dollars for two hours",
+        "3 bedrooms, 200 dollars for two hours thirty minutes",
       ],
       highlight: false,
       reference:
@@ -68,14 +66,14 @@ const Memberships = () => {
     {
       title: "Gold Membership",
       description:
-        "Balanced plan for consistency and deeper care. Includes four cleanings each month with a light deep clean on every fourth visit. Works for homes or offices that see regular use.",
+        "Four cleanings each month with a light deep clean every fourth visit.",
       features: [
-        "Four cleanings each month",
+        "Four monthly cleanings",
         "Light deep clean every fourth visit",
-        "Starting at 320 dollars per month for up to two bedrooms",
-        "Month to month, cancel with seven days notice",
-        "Options include 1 to 2 bedroom at 320 dollars for two hours thirty minutes",
-        "Option for 3 bedrooms at 380 dollars for three hours thirty minutes",
+        "From 320 dollars for up to two bedrooms",
+        "Month to month, seven day notice",
+        "1 to 2 bedrooms, 320 dollars for two hours thirty minutes",
+        "3 bedrooms, 380 dollars for three hours thirty minutes",
       ],
       highlight: true,
       reference:
@@ -84,16 +82,16 @@ const Memberships = () => {
     {
       title: "Platinum Membership",
       description:
-        "Premium plan for clients who want convenience and detail. Includes weekly cleanings, priority scheduling, and a supply restock service. Works for families, professionals, or office suites that need constant upkeep.",
+        "Weekly cleanings with priority scheduling and supply restock.",
       features: [
         "Weekly cleanings",
         "Priority scheduling",
-        "Supply restock service",
-        "Starting at 450 dollars per month for up to two bedrooms",
-        "Month to month, cancel with fourteen days notice",
-        "Options include 1 to 2 bedroom at 450 dollars for two hours thirty minutes",
-        "Option for 3 bedrooms at 520 dollars for three hours thirty minutes",
-        "Members receive fifteen percent off specialty add-ons",
+        "Supply restock",
+        "From 450 dollars for up to two bedrooms",
+        "Month to month, fourteen day notice",
+        "1 to 2 bedrooms, 450 dollars for two hours thirty minutes",
+        "3 bedrooms, 520 dollars for three hours thirty minutes",
+        "Fifteen percent off specialty add ons",
       ],
       highlight: false,
       reference:
@@ -135,16 +133,16 @@ const Memberships = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {membershipTiers.map((tier, index) => (
-              <motion.div key={index} variants={fadeUp} className={
-                cn(
-                  "size-full flex flex-col items-center justify-center",
-                )
-              }>
+              <motion.div
+                key={index}
+                variants={fadeUp}
+                className={cn(
+                  "size-full flex flex-col items-center justify-center"
+                )}
+              >
                 <Card
                   className={`flex h-full flex-col ${
-                    tier.highlight
-                      ? "border-primary shadow-lg"
-                      : "md:scale-50"
+                    tier.highlight ? "border-primary shadow-lg" : "md:scale-50"
                   }`}
                 >
                   <CardHeader className="text-center">
