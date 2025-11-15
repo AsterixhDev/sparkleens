@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import Layout from "@/components/Layout";
 import BlobBackground from "@/components/ui/blob-background";
@@ -47,35 +48,54 @@ const Memberships = () => {
 
   const membershipTiers = [
     {
-      title: "Silver Plan",
-      description: "Perfect for busy professionals",
+      title: "Silver Membership",
+      description:
+        "Entry-level plan for light upkeep and maintenance. Works for smaller homes, apartments, or office spaces. Includes two general cleanings each month covering kitchens, bathrooms, floors, and high-touch areas.",
       features: [
-        "Bi-weekly cleaning",
-        "10% off add-ons",
-        "Priority scheduling",
+        "Two cleanings each month",
+        "Covers kitchens, bathrooms, floors, high-touch areas",
+        "Starting at 160 dollars per month for up to two bedrooms",
+        "Month to month, cancel with seven days notice",
+        "Options include 1 to 2 bedroom at 160 dollars for two hours",
+        "Option for 3 bedrooms at 200 dollars for two hours thirty minutes",
       ],
       highlight: false,
+      reference:
+        "https://book.squareup.com/appointments/kc9k92jp0fullx/location/L8ED2XJBBMFV0/services/JVYI7FAIHTLY2HJPLHZDVHRD",
     },
     {
-      title: "Gold Plan",
-      description: "Our most popular membership",
+      title: "Gold Membership",
+      description:
+        "Balanced plan for consistency and deeper care. Includes four cleanings each month with a light deep clean on every fourth visit. Works for homes or offices that see regular use.",
       features: [
-        "Weekly cleaning",
-        "15% off add-ons",
-        "Free interior appliance clean every month",
+        "Four cleanings each month",
+        "Light deep clean every fourth visit",
+        "Starting at 320 dollars per month for up to two bedrooms",
+        "Month to month, cancel with seven days notice",
+        "Options include 1 to 2 bedroom at 320 dollars for two hours thirty minutes",
+        "Option for 3 bedrooms at 380 dollars for three hours thirty minutes",
       ],
       highlight: true,
+      reference:
+        "https://book.squareup.com/appointments/kc9k92jp0fullx/location/L8ED2XJBBMFV0/services/JVS3IG3ZY5NNZ5T676NOD67F",
     },
     {
-      title: "Platinum Plan",
-      description: "Ultimate flexibility and savings",
+      title: "Platinum Membership",
+      description:
+        "Premium plan for clients who want convenience and detail. Includes weekly cleanings, priority scheduling, and a supply restock service. Works for families, professionals, or office suites that need constant upkeep.",
       features: [
-        "Custom schedule",
-        "20% off add-ons",
-        "Free quarterly deep clean",
-        "Free ozone treatment",
+        "Weekly cleanings",
+        "Priority scheduling",
+        "Supply restock service",
+        "Starting at 450 dollars per month for up to two bedrooms",
+        "Month to month, cancel with fourteen days notice",
+        "Options include 1 to 2 bedroom at 450 dollars for two hours thirty minutes",
+        "Option for 3 bedrooms at 520 dollars for three hours thirty minutes",
+        "Members receive fifteen percent off specialty add-ons",
       ],
       highlight: false,
+      reference:
+        "https://book.squareup.com/appointments/kc9k92jp0fullx/location/L8ED2XJBBMFV0/services/MEZPBBFDEZ5DJIB4KT4CETEC",
     },
   ];
 
@@ -138,12 +158,14 @@ const Memberships = () => {
                     </ul>
                   </CardContent>
                   <CardFooter>
-                    <Button
-                      className="w-full rounded-full"
-                      variant={tier.highlight ? "default" : "outline"}
-                    >
-                      Join Now
-                    </Button>
+                    <Link to={tier.reference}>
+                      <Button
+                        className="w-full rounded-full"
+                        variant={tier.highlight ? "default" : "outline"}
+                      >
+                        Join Now
+                      </Button>
+                    </Link>
                   </CardFooter>
                 </Card>
               </motion.div>
