@@ -142,7 +142,7 @@ const Memberships = () => {
               >
                 <Card
                   className={`flex h-full flex-col ${
-                    tier.highlight ? "border-primary shadow-lg" : "md:scale-50"
+                    tier.highlight ? "border-primary shadow-lg" : "md:scale-95"
                   }`}
                 >
                   <CardHeader className="text-center">
